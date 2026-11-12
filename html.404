@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه یافت نشد | موبایلی بلوچستان</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" href="images/logo.jpg" type="image/jpeg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/glass.css">
+    <link rel="stylesheet" href="css/ux.css">
+    <style>
+        .not-found-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fff9f5, #fff5ec);
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .not-found-content {
+            text-align: center;
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+            animation: notFoundIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes notFoundIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nf-404 {
+            font-size: 8rem;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #f97316, #ea580c, #fb923c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -0.05em;
+            text-shadow: 0 20px 40px rgba(249, 115, 22, 0.2);
+            animation: nf404Float 3s ease-in-out infinite;
+        }
+
+        @keyframes nf404Float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .nf-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #fff7ed, #fed7aa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -30px auto 24px;
+            font-size: 2.5rem;
+            color: #f97316;
+            box-shadow: 0 12px 30px rgba(249, 115, 22, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .not-found-content h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin: 0 0 14px;
+        }
+
+        .not-found-content p {
+            color: #6b7280;
+            font-size: 1rem;
+            line-height: 1.9;
+            margin: 0 0 30px;
+        }
+
+        .nf-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .nf-actions .btn {
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .nf-suggestions {
+            border-top: 1px dashed #e5e7eb;
+            padding-top: 30px;
+        }
+
+        .nf-suggestions h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0 0 16px;
+        }
+
+        .nf-links {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 30px;
+            color: #4b5563;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.25s;
+        }
+
+        .nf-link:hover {
+            border-color: #f97316;
+            color: #f97316;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.15);
+        }
+
+        .nf-link i {
+            color: #f97316;
+        }
+
+        /* Background decorations */
+        .nf-bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .nf-bg-shape.shape-1 {
+            width: 400px;
+            height: 400px;
+            background: #f97316;
+            top: -100px;
+            right: -100px;
+            animation: floatShape 15s infinite ease-in-out;
+        }
+
+        .nf-bg-shape.shape-2 {
+            width: 300px;
+            height: 300px;
+            background: #fb923c;
+            bottom: -80px;
+            left: -80px;
+            animation: floatShape 20s infinite ease-in-out reverse;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        @media (max-width: 576px) {
+            .nf-404 { font-size: 5rem; }
+            .not-found-content h1 { font-size: 1.3rem; }
+            .nf-icon { width: 80px; height: 80px; font-size: 2rem; margin-top: -20px; }
+            .nf-actions .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Shapes -->
+    <div class="nf-bg-shape shape-1"></div>
+    <div class="nf-bg-shape shape-2"></div>
+
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- 404 Content -->
+    <main class="not-found-page">
+        <div class="not-found-content">
+            <div class="nf-404">404</div>
+            <div class="nf-icon">
+                <i class="bi bi-emoji-frown"></i>
+            </div>
+            <h1>صفحه‌ای که دنبالش بودید پیدا نشد!</h1>
+            <p>
+                احتمالاً آدرس را اشتباه وارد کرده‌اید یا این صفحه حذف شده است.
+                نگران نباشید — می‌توانید از لینک‌های زیر استفاده کنید.
+            </p>
+
+            <div class="nf-actions">
+                <a href="index.html" class="btn btn-primary">
+                    <i class="bi bi-house-door"></i>
+                    بازگشت به خانه
+                </a>
+                <a href="products.html" class="btn btn-outline-primary">
+                    <i class="bi bi-shop"></i>
+                    مشاهده فروشگاه
+                </a>
+            </div>
+
+            <div class="nf-suggestions">
+                <h3>دسترسی سریع</h3>
+                <div class="nf-links">
+                    <a href="mobiles.html" class="nf-link">
+                        <i class="bi bi-phone"></i> موبایل
+                    </a>
+                    <a href="laptops.html" class="nf-link">
+                        <i class="bi bi-laptop"></i> لپ‌تاپ
+                    </a>
+                    <a href="tablets.html" class="nf-link">
+                        <i class="bi bi-tablet"></i> تبلت
+                    </a>
+                    <a href="watches.html" class="nf-link">
+                        <i class="bi bi-smartwatch"></i> ساعت
+                    </a>
+                    <a href="accessories.html" class="nf-link">
+                        <i class="bi bi-headphones"></i> لوازم جانبی
+                    </a>
+                    <a href="contact.html" class="nf-link">
+                        <i class="bi bi-telephone"></i> تماس با ما
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/modal.js" defer></script>
+    <script src="js/components.js" defer></script>
+    <script src="js/ux.js" defer></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        Promise.all([
+            fetch('components/header.html').then(r => r.text()),
+            fetch('components/footer.html').then(r => r.text())
+        ]).then(([headerHTML, footerHTML]) => {
+            document.getElementById('header-placeholder').innerHTML = headerHTML;
+            document.getElementById('footer-placeholder').innerHTML = footerHTML;
+            if (typeof updateAuthUI === 'function') updateAuthUI();
+            if (typeof setupHeaderScroll === 'function') setupHeaderScroll();
+        }).catch(err => console.error(err));
+    });
+    </script>
+</body>
+</html>

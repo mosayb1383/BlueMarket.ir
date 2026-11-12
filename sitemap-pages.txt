@@ -1,0 +1,14 @@
+index.html
+products.html
+mobiles.html
+laptops.html
+tablets.html
+watches.html
+accessories.html
+faq.html
+contact.html
+abuot.html
+privacy.html
+terms.html
+refund.html
+report.html

@@ -1,0 +1,146 @@
+/* ==========================================================
+   CATEGORY PAGE — بلو مارکت
+   برای صفحات mobiles/laptops/tablets/watches/accessories
+   ========================================================== */
+
+/* Hero دسته */
+.bm-category-hero {
+    background: linear-gradient(135deg, #f97316, #ea580c, #fb923c);
+    color: #fff;
+    margin: 0 0 24px;
+    padding: 40px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.bm-category-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 90% 20%, rgba(255,255,255,0.2), transparent 40%),
+        radial-gradient(circle at 10% 80%, rgba(255,255,255,0.1), transparent 45%);
+    pointer-events: none;
+}
+
+.bm-category-hero .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.bm-cat-hero-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.bm-cat-hero-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.bm-cat-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.bm-cat-hero-badge i {
+    font-size: 0.9rem;
+}
+
+.bm-cat-hero-text h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+}
+
+.bm-cat-hero-text p {
+    font-size: 0.95rem;
+    margin: 0;
+    opacity: 0.92;
+    line-height: 1.7;
+    max-width: 500px;
+}
+
+.bm-cat-hero-stats {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.bm-cat-stat {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 14px 20px;
+    text-align: center;
+    min-width: 100px;
+    transition: all 0.3s;
+}
+
+.bm-cat-stat:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-3px);
+}
+
+.bm-cat-stat .num {
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.bm-cat-stat .label {
+    font-size: 0.72rem;
+    opacity: 0.9;
+}
+
+/* ریسپانسیو Hero */
+@media (max-width: 767px) {
+    .bm-category-hero {
+        padding: 28px 0;
+        margin-bottom: 18px;
+    }
+
+    .bm-cat-hero-text h1 {
+        font-size: 1.4rem;
+    }
+
+    .bm-cat-hero-text p {
+        font-size: 0.85rem;
+    }
+
+    .bm-cat-hero-stats {
+        width: 100%;
+    }
+
+    .bm-cat-stat {
+        flex: 1;
+        min-width: 0;
+        padding: 10px 8px;
+    }
+
+    .bm-cat-stat .num {
+        font-size: 1.1rem;
+    }
+
+    .bm-cat-stat .label {
+        font-size: 0.68rem;
+    }
+}

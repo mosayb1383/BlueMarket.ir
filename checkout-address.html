@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انتخاب آدرس و زمان ارسال - فروشگاه بلوچستان</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #f97316;
+            --primary-orange-dark: #ea580c;
+        }
+
+        .btn-orange {
+            background-color: var(--primary-orange) !important;
+            border-color: var(--primary-orange) !important;
+            color: white !important;
+        }
+
+        .btn-orange:hover {
+            background-color: var(--primary-orange-dark) !important;
+            border-color: var(--primary-orange-dark) !important;
+        }
+
+        .address-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .address-card:hover {
+            border-color: var(--primary-orange);
+            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
+        }
+
+        .address-card.active {
+            border-color: var(--primary-orange);
+            background-color: rgba(249, 115, 22, 0.05);
+        }
+
+        .delivery-option {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .delivery-option:hover {
+            border-color: var(--primary-orange);
+            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.2);
+        }
+
+        .delivery-option.active {
+            border-color: var(--primary-orange);
+            background-color: rgba(249, 115, 22, 0.05);
+        }
+
+        .order-summary {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .order-item-details h6 {
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+        }
+
+        .order-item-details p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* فرم افزودن آدرس */
+        .add-address-form {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .add-address-form.show {
+            display: block;
+        }
+    </style>
+<meta name="description" content="انتخاب آدرس و زمان ارسال - فروشگاه بلوچستان | موبایلی بلوچستان">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="css/support-chat.css">
+</head>
+
+<body>
+<a class="skip-to-content" href="#main-content">رفتن به محتوای اصلی</a>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand fw-bold text-primary" href="index.html">
+                        <i class="bi bi-shop me-2"></i>فروشگاه بلوچستان
+                    </a>
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="cart.html" class="btn btn-outline-primary position-relative">
+                            <i class="bi bi-cart3"></i>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="py-4">
+        <div class="container">
+            <div class="row">
+                <!-- بخش چپ: آدرس و زمان ارسال -->
+                <div class="col-lg-8">
+                    <div class="card mb-4">
+                        <div class="card-header bg-white">
+                            <h4 class="mb-0">آدرس ارسال</h4>
+                        </div>
+                        <div class="card-body">
+                            <!-- آدرس‌های موجود -->
+                            <div class="address-card active">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">شنبه زهی</h6>
+                                        <p class="mb-1">تهران، خیابان ولیعصر، بعد از میدان ونک، کوچه فروشگاه بلوچستان،
+                                            پلاک ۱۴۰۳</p>
+                                        <p class="mb-0">تلفن: ۰۹۲۲۹۴۸۰۲۵۲</p>
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-success">پیش‌فرض</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="address-card">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1">شنبه زهی</h6>
+                                        <p class="mb-1">زاهدان، خیابان اصلی، کوچه دوم، پلاک ۱۰</p>
+                                        <p class="mb-0">تلفن: ۰۹۲۲۹۴۸۰۲۵۲</p>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-secondary">حذف</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- فرم افزودن آدرس جدید -->
+                            <div class="add-address-form" id="addAddressForm">
+                                <h5>افزودن آدرس جدید</h5>
+                                <form id="newAddressForm">
+                                    <div class="mb-3">
+                                        <label for="fullName" class="form-label">نام و نام خانوادگی</label>
+                                        <input type="text" class="form-control" id="fullName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">شماره موبایل</label>
+                                        <input type="tel" class="form-control" id="phone" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="province" class="form-label">استان</label>
+                                        <select class="form-select" id="province" required>
+                                            <option selected>انتخاب استان</option>
+                                            <option>تهران</option>
+                                            <option>اصفهان</option>
+                                            <option>مشهد</option>
+                                            <option>شیراز</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="city" class="form-label">شهر</label>
+                                        <select class="form-select" id="city" required>
+                                            <option selected>انتخاب شهر</option>
+                                            <option>تهران</option>
+                                            <option>کرج</option>
+                                            <option>اسلامشهر</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address" class="form-label">آدرس کامل</label>
+                                        <textarea class="form-control" id="address" rows="3" required></textarea>
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        <input class="form-check-input" type="checkbox" id="isDefault">
+                                        <label class="form-check-label" for="isDefault">
+                                            این آدرس را به عنوان آدرس پیش‌فرض ذخیره کن
+                                        </label>
+                                    </div>
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-orange">ذخیره آدرس</button>
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            onclick="cancelAddAddress()">لغو</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <button class="btn btn-outline-primary w-100 mt-3" onclick="showAddAddressForm()">
+                                <i class="bi bi-plus-circle me-2"></i>افزودن آدرس جدید
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h4 class="mb-0">زمان ارسال</h4>
+                        </div>
+                        <div class="card-body">
+                            <!-- گزینه‌های ارسال -->
+                            <div class="delivery-option active">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">ارسال سریع</h6>
+                                        <p class="mb-0">ارسال فردا - رایگان</p>
+                                    </div>
+                                    <i class="bi bi-check-circle text-success"></i>
+                                </div>
+                            </div>
+
+                            <div class="delivery-option">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">ارسال عادی</h6>
+                                        <p class="mb-0">ارسال ظرف ۳ روز کاری - رایگان</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="delivery-option">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">ارسال فوری</h6>
+                                        <p class="mb-0">ارسال همین امروز - ۲۰,۰۰۰ تومان</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- بخش راست: خلاصه سفارش -->
+                <div class="col-lg-4">
+                    <div class="order-summary">
+                        <h4 class="mb-3">خلاصه سفارش</h4>
+
+                        <!-- آیتم‌های سفارش -->
+                        <div class="order-item">
+                            <img src="images/products/placeholder-product.svg" alt="موبایل">
+                            <div class="order-item-details">
+                                <h6>گوشی موبایل آتر مدل X6c</h6>
+                                <p>۱ عدد × ۱,۳۹۹,۰۰۰ تومان</p>
+                            </div>
+                        </div>
+
+                        <div class="order-item">
+                            <img src="images/products/placeholder-product.svg" alt="هدفون">
+                            <div class="order-item-details">
+                                <h6>هدفون بلوتوثی ناتینگ</h6>
+                                <p>۱ عدد × ۲,۷۹۰,۰۰۰ تومان</p>
+                            </div>
+                        </div>
+
+                        <!-- جمع کل -->
+                        <div class="mt-3 pt-3 border-top">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>جمع کالاها:</span>
+                                <span>۴,۱۸۹,۰۰۰ تومان</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>هزینه ارسال:</span>
+                                <span>رایگان</span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3 pt-2 border-top fw-bold">
+                                <span>مبلغ قابل پرداخت:</span>
+                                <span>۴,۱۸۹,۰۰۰ تومان</span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-orange w-100 mt-4" onclick="proceedToPayment()">
+                            <i class="bi bi-credit-card me-2"></i>ادامه پرداخت
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // نمایش فرم افزودن آدرس
+        function showAddAddressForm() {
+            document.getElementById('addAddressForm').classList.add('show');
+        }
+
+        // لغو افزودن آدرس
+        function cancelAddAddress() {
+            document.getElementById('addAddressForm').classList.remove('show');
+        }
+
+        // تابع ادامه پرداخت
+        function proceedToPayment() {
+            // اینجا می‌تونی اعتبارسنجی انجام بدی
+            // مثلاً چک کنی که آدرس و زمان ارسال انتخاب شده باشه
+
+            // بعد به صفحه پرداخت برو
+            window.location.href = 'checkout.html';
+        }
+    </script>
+<!-- SEO -->
+<script src="js/seo.js" defer></script>
+<script src="js/support-chat.js" defer></script>
+</body>
+
+</html>

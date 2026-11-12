@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80" role="img" aria-label="Blue Market">
+  <defs>
+    <linearGradient id="bmGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="45%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <linearGradient id="bmText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+
+  <!-- آیکن -->
+  <rect x="6" y="10" width="60" height="60" rx="18" fill="url(#bmGrad2)"/>
+  <path d="M22 24 H36 C42 24 46 27.5 46 32.5 C46 35.5 44.4 37.8 41.8 39 C45 40.2 47 42.8 47 46 C47 51.4 42.6 55 36.6 55 H22 Z
+           M28 29.5 V36.5 H35.5 C38 36.5 39.8 35.2 39.8 33 C39.8 30.8 38 29.5 35.5 29.5 Z
+           M28 41.5 V49.5 H36.2 C39 49.5 40.9 48.2 40.9 45.5 C40.9 42.8 39 41.5 36.2 41.5 Z"
+        fill="#ffffff"/>
+
+  <!-- متن برند -->
+  <text x="82" y="38" font-family="Vazirmatn, Tahoma, sans-serif" font-size="24" font-weight="900" fill="url(#bmText)" direction="rtl" text-anchor="start">
+    بلو مارکت
+  </text>
+  <text x="82" y="60" font-family="Vazirmatn, Tahoma, sans-serif" font-size="13" font-weight="700" fill="#94a3b8" letter-spacing="2">
+    BLUE MARKET
+  </text>
+</svg>

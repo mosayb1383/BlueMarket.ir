@@ -1,0 +1,57 @@
+# robots.txt — بلو مارکت
+# https://YOUR-DOMAIN.ir
+
+User-agent: *
+Allow: /
+
+# صفحات خصوصی — دسترسی برای موتورهای جستجو ممنوع
+Disallow: /admin/
+Disallow: /auth.html
+Disallow: /account.html
+Disallow: /cart.html
+Disallow: /checkout.html
+Disallow: /thankyou.html
+Disallow: /notifications.html
+Disallow: /user-panel.html
+Disallow: /order-registration.html
+Disallow: /checkout-address.html
+Disallow: /checkout%20-%20Copy.html
+Disallow: /report.html
+Disallow: /api/
+Disallow: /*?*session*
+Disallow: /*?*token*
+
+# فایل‌های سمت سرور
+Disallow: /js/
+Disallow: /tools/
+Disallow: /*.json$
+Disallow: /*.txt$
+
+# دسترسی به فایل‌های استاتیک مجاز است
+Allow: /css/
+Allow: /images/
+Allow: /components/
+
+# نقشه سایت
+Sitemap: https://YOUR-DOMAIN.ir/sitemap.xml
+
+# خزنده‌های خاص
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+
+User-agent: YandexBot
+Allow: /
+Disallow: /admin/
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /admin/
+
+# Crawl-delay برای کاهش بار
+User-agent: *
+Crawl-delay: 1

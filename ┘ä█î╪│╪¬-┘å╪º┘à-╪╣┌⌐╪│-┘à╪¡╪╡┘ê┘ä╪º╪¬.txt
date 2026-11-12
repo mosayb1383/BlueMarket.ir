@@ -1,0 +1,128 @@
+لیست نام فایل عکس محصولات
+========================================
+هر عکس را با نام  <نام فایل>-<شماره>.webp  (یا jpg / png) در پوشه‌ی images/products/ بگذارید.
+عکس اول (-1) در کارت محصول نمایش داده می‌شود؛ بقیه (-2، -3، ...) در گالری صفحه‌ی محصول.
+بعد از اضافه‌کردن عکس‌ها:  node tools/link-product-images.js
+
+
+── موبایل ──
+[✓] samsung-s25-ultra                   گلکسی S25 اولترا
+[ ] samsung-s25-plus                    گلکسی S25 پلاس
+[ ] samsung-s24-fe                      گلکسی S24 FE
+[ ] samsung-a55                         گلکسی A55
+[ ] samsung-a35                         گلکسی A35
+[ ] samsung-a25                         گلکسی A25
+[ ] samsung-a16                         گلکسی A16
+[ ] iphone-16-pro-max                   آیفون ۱۶ پرو مکس
+[ ] iphone-16-pro                       آیفون ۱۶ پرو
+[ ] iphone-16                           آیفون ۱۶
+[ ] iphone-15-pro                       آیفون ۱۵ پرو
+[ ] iphone-15                           آیفون ۱۵
+[ ] xiaomi-14-ultra                     شیائومی ۱۴ اولترا
+[ ] xiaomi-14                           شیائومی ۱۴
+[ ] poco-x6-pro                         پوکو X6 پرو
+[ ] redmi-note-13-pro                   ردمی نوت ۱۳ پرو
+[ ] redmi-15                            ردمی ۱۵
+[ ] huawei-pura-70-ultra                پورا ۷۰ اولترا
+[ ] huawei-pura-70-pro                  پورا ۷۰ پرو
+[ ] huawei-nova-12                      نوا ۱۲
+[ ] huawei-nova-12i                     نوا ۱۲i
+[ ] huawei-mate-x5                      میت X5
+
+── لپ‌تاپ ──
+[ ] rog-strix-scar-18                   ROG Strix Scar 18
+[ ] rog-zephyrus-g14                    ROG Zephyrus G14
+[ ] asus-tuf-f16                        ایسوس TUF F16
+[ ] asus-vivobook-16x                   ایسوس Vivobook 16X
+[ ] asus-zenbook-14                     ایسوس Zenbook 14
+[ ] hp-spectre-x360                     HP Spectre x360
+[ ] hp-envy-15                          HP Envy 15
+[ ] hp-pavilion-15                      اچ‌پی Pavilion 15
+[ ] hp-victus-16                        HP Victus 16
+[ ] lenovo-legion-pro-5                 Lenovo Legion Pro 5
+[ ] lenovo-x1-carbon                    لنوو X1 Carbon
+[ ] lenovo-ideapad-3                    Lenovo IdeaPad 3
+[ ] macbook-pro-16-m3-max               مک‌بوک پرو ۱۶
+[ ] macbook-pro-14-m3-pro               مک‌بوک پرو ۱۴
+[ ] macbook-air-15-m3                   مک‌بوک ایر ۱۵
+
+── تبلت ──
+[ ] ipad-pro-12-9-m4                    آیپد پرو ۱۲.۹ M4
+[ ] ipad-pro-11-m4                      آیپد پرو ۱۱ M4
+[ ] ipad-air-11-m2                      آیپد ایر ۱۱
+[ ] ipad-10-9                           آیپد ۱۰.۹
+[ ] samsung-tab-s10-ultra               گلکسی تب S10 Ultra
+[ ] samsung-tab-s10-plus                گلکسی تب S10+
+[ ] samsung-tab-s9-fe                   گلکسی تب S9 FE
+[ ] samsung-tab-a9-plus                 گلکسی تب A9+
+[ ] samsung-tab-a9                      گلکسی تب A9
+[ ] huawei-matepad-pro-13-2             میت‌پد پرو ۱۳.۲
+[ ] huawei-matepad-11-5                 میت‌پد ۱۱.۵
+[ ] huawei-matepad-11                   میت‌پد ۱۱
+
+── ساعت هوشمند ──
+[ ] apple-watch-ultra-2                 اپل واچ اولترا ۲
+[ ] apple-watch-series-10               اپل واچ سری ۱۰
+[ ] apple-watch-se                      اپل واچ SE
+[ ] samsung-watch-ultra                 گلکسی واچ اولترا
+[ ] samsung-watch-7                     گلکسی واچ ۷
+[ ] samsung-watch-6-classic             گلکسی واچ ۶ کلاسیک
+[ ] garmin-fenix-7x                     گارمین Fenix 7X
+[ ] garmin-venu-3                       گارمین Venu 3
+[ ] garmin-venu-2                       گارمین ونا ۲
+[ ] amazfit-gtr-4                       امیزفیت GTR 4
+[ ] amazfit-t-rex-2                     امیزفیت T-Rex 2
+[ ] amazfit-gts-4-mini                  امیزفیت GTS 4 Mini
+
+── لوازم جانبی ──
+[ ] sony-wh-1000xm5                     سونی WH-1000XM5
+[ ] sony-wf-1000xm5                     سونی WF-1000XM5
+[ ] sony-wh-ch720n                      سونی WH-CH720N
+[ ] airpods-pro-2                       ایرپاد پرو ۲
+[ ] airpods-4                           ایرپاد ۴
+[ ] samsung-buds3-pro                   گلکسی بادز ۳ پرو
+[ ] samsung-buds3                       گلکسی بادز ۳
+[ ] samsung-buds2-pro                   گلکسی بادز ۲ پرو
+[ ] xo-ev51                             ایکس او EV51
+[ ] xo-be36                             ایکس او BE36
+[ ] baseus-bowie-ma10                   باسئوس Bowie MA10
+[ ] anker-q30                           انکر Soundcore Q30
+[ ] jbl-tune-770nc                      JBL Tune 770NC
+[ ] marshall-major-v                    مارشال Major V
+[ ] marshall-minor-iv                   مارشال Minor IV
+[ ] anker-737                           انکر 737
+[ ] anker-20000                         پاوربانک انکر ۲۰K
+[ ] anker-10000                         پاوربانک انکر ۱۰K
+[ ] baseus-20000-65w                    باسئوس ۲۰K 65W
+[ ] baseus-10000                        باسئوس ۱۰K
+[ ] xiaomi-20000-50w                    شیائومی ۲۰K 50W
+[ ] xiaomi-10000-pb                     شیائومی ۱۰K
+[ ] tesco-10000                         پاوربانک تسکو
+[ ] tesco-20000                         تسکو ۲۰K
+[ ] hiska-20000                         هیسکا ۲۰K
+[ ] hiska-30000                         هیسکا ۳۰K
+[ ] apple-magsafe-battery               مگ‌سیف باتری
+[ ] anker-100w-gan                      انکر ۱۰۰W GaN
+[ ] anker-65w-gan                       انکر ۶۵W GaN
+[ ] anker-30w                           انکر ۳۰W
+[ ] baseus-65w-gan                      باسئوس ۶۵W
+[ ] baseus-100w-gan                     باسئوس ۱۰۰W
+[ ] apple-20w                           شارژر اپل ۲۰W
+[ ] apple-35w-dual                      شارژر اپل ۳۵W
+[ ] samsung-45w                         شارژر سامسونگ ۴۵W
+[ ] baseus-cable-2m                     کابل Type-C باسئوس
+[ ] apple-lightning-cable               کابل اپل
+[ ] baseus-hdmi-21                      کابل HDMI
+[ ] baseus-wireless-15w                 شارژر بی‌سیم ۱۵W
+[ ] apple-magsafe-clear-16pm            قاب مگ‌سیف ۱۶ پرو مکس
+[ ] apple-silicone-16-pro               قاب سیلیکون اپل
+[ ] apple-leather-16                    قاب چرم اپل
+[ ] samsung-case-s25-ultra              قاب S25 Ultra
+[ ] samsung-case-s25                    قاب S25 سیلیکون
+[ ] samsung-case-a55                    قاب A55
+[ ] xiaomi-case-14-ultra                قاب شیائومی ۱۴
+[ ] xiaomi-case-note-13-pro             قاب Redmi Note 13
+[ ] apple-airpods-pro-2-case            قاب ایرپاد پرو ۲
+[ ] apple-watch-leather-band            بند چرمی اپل واچ
+[ ] apple-watch-silicone-band           بند سیلیکون اپل واچ
+[ ] apple-ipad-pro-case                 قاب آیپد پرو

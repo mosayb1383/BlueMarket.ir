@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محصولات | بلو مارکت</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin-common.css">
+    <link rel="stylesheet" href="admin-header.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar" id="adminSidebar"></aside>
+        <div class="admin-overlay" id="adminOverlay"></div>
+
+        <div class="admin-main">
+            <header class="admin-topbar" id="adminTopbar"></header>
+            <main class="admin-content">
+
+                <!-- آمار سریع -->
+                <div class="stats-grid" id="productsStats" style="margin-bottom:20px;"></div>
+
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3><i class="bi bi-box-seam"></i> مدیریت محصولات</h3>
+                        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                            <input type="text" class="admin-search-input" id="productSearch" placeholder="جستجو در نام، برند، دسته..." oninput="ProductsPage.search(this.value)">
+                            <select class="admin-search-input" id="productFilterCat" onchange="ProductsPage.filterCategory(this.value)" style="min-width:140px;">
+                                <option value="">همه دسته‌ها</option>
+                                <option value="mobile">موبایل</option>
+                                <option value="laptop">لپ‌تاپ</option>
+                                <option value="tablet">تبلت</option>
+                                <option value="watch">ساعت</option>
+                                <option value="accessory">لوازم جانبی</option>
+                            </select>
+                            <select class="admin-search-input" id="productFilterDemo" onchange="ProductsPage.filterDemo(this.value)" style="min-width:130px;">
+                                <option value="">همه</option>
+                                <option value="official">فقط قیمت رسمی</option>
+                                <option value="demo">فقط Demo</option>
+                            </select>
+                            <button class="btn-primary-admin" onclick="ProductsPage.openAdd()">
+                                <i class="bi bi-plus-circle"></i> محصول جدید
+                            </button>
+                        </div>
+                    </div>
+                    <div class="admin-card-body">
+                        <div id="productsList"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal محصول -->
+    <div class="admin-modal-backdrop" id="productModal">
+        <div class="admin-modal" style="max-width:760px;">
+            <div class="admin-modal-header">
+                <h4><i class="bi bi-box-seam"></i> <span id="productModalTitle">محصول جدید</span></h4>
+                <button class="admin-modal-close" onclick="AdminApp.closeModal('productModal')">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="admin-modal-body">
+                <div class="admin-form-grid">
+                    <div class="admin-form-group full">
+                        <label>نام کامل محصول *</label>
+                        <input type="text" id="pName" placeholder="مثال: گوشی سامسونگ Galaxy S25">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>نام کوتاه *</label>
+                        <input type="text" id="pShortName" placeholder="گلکسی S25">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>برند *</label>
+                        <input type="text" id="pBrand" placeholder="samsung">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>دسته‌بندی *</label>
+                        <select id="pCategory" onchange="ProductsPage.watchCat()">
+                            <option value="">انتخاب کنید</option>
+                            <option value="mobile">گوشی موبایل</option>
+                            <option value="laptop">لپ‌تاپ</option>
+                            <option value="tablet">تبلت</option>
+                            <option value="watch">ساعت هوشمند</option>
+                            <option value="accessory">لوازم جانبی</option>
+                        </select>
+                    </div>
+                    <div class="admin-form-group" id="subWrap" style="display:none;">
+                        <label>نوع محصول (برای لوازم جانبی)</label>
+                        <select id="pSubcategory">
+                            <option value="">انتخاب کنید</option>
+                            <option value="headphones">هدفون</option>
+                            <option value="powerbank">پاوربانک</option>
+                            <option value="charger">شارژر</option>
+                            <option value="cable">کابل</option>
+                            <option value="case">قاب</option>
+                            <option value="battery">باتری</option>
+                            <option value="mouse">ماوس</option>
+                            <option value="keyboard">کیبورد</option>
+                            <option value="monitor">مانیتور</option>
+                            <option value="storage">هارد</option>
+                            <option value="gaming">گیمینگ</option>
+                            <option value="computer-accessory">لوازم کامپیوتر</option>
+                            <option value="computer-parts">قطعات کامپیوتر</option>
+                        </select>
+                    </div>
+                    <div class="admin-form-group">
+                        <label>قیمت (تومان) *</label>
+                        <input type="number" id="pPrice" placeholder="0" min="0">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>قیمت قبل از تخفیف</label>
+                        <input type="number" id="pOldPrice" min="0">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>موجودی</label>
+                        <input type="number" id="pStock" value="10" min="0">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>امتیاز</label>
+                        <input type="number" id="pRating" value="4.5" min="0" max="5" step="0.1">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>تعداد نظرات</label>
+                        <input type="number" id="pReviewCount" value="0" min="0">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>گارانتی</label>
+                        <input type="text" id="pWarranty" placeholder="۱۸ ماه گارانتی">
+                    </div>
+                    <div class="admin-form-group full">
+                        <label>لینک تصویر *</label>
+                        <input type="url" id="pImage" placeholder="https://... یا images/products/...">
+                    </div>
+                    <div class="admin-form-group full">
+                        <label>رنگ‌ها (با کاما)</label>
+                        <input type="text" id="pColors" placeholder="مشکی، آبی">
+                    </div>
+                    <div class="admin-form-group full">
+                        <label>ویژگی‌ها (با کاما)</label>
+                        <input type="text" id="pHighlights" placeholder="دوربین ۵۰MP، باتری ۵۰۰۰">
+                    </div>
+                    <div class="admin-form-group full">
+                        <label>توضیحات</label>
+                        <textarea id="pDesc" rows="3"></textarea>
+                    </div>
+                    <div class="full admin-switch-row">
+                        <label class="admin-switch-label"><input type="checkbox" id="pIsNew"> محصول جدید</label>
+                        <label class="admin-switch-label"><input type="checkbox" id="pIsBestseller"> پرفروش</label>
+                        <label class="admin-switch-label"><input type="checkbox" id="pIsFeatured"> منتخب</label>
+                        <label class="admin-switch-label"><input type="checkbox" id="pIsSpecialSale"> فروش ویژه</label>
+                        <label class="admin-switch-label"><input type="checkbox" id="pIsDemo"> Demo (داده ساختگی)</label>
+                        <label class="admin-switch-label"><input type="checkbox" id="pPriceReviewRequired"> قیمت نیازمند تأیید</label>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-modal-footer">
+                <button class="btn-outline-admin" onclick="AdminApp.closeModal('productModal')">انصراف</button>
+                <button class="btn-primary-admin" onclick="ProductsPage.save()">
+                    <i class="bi bi-check-circle"></i> ذخیره
+                </button>
+            </div>
+        </div>
+    </div>
+
+<script src="../js/notification-center.js"></script>
+    <script src="admin-common.js"></script>
+    <script src="../js/products-data.js"></script>
+    <script src="../js/product-images.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script>
+    const ProductsPage = {
+        state: { products: [], search: "", filterCat: "", filterDemo: "", editingId: null },
+
+        init() {
+            if (!AdminApp.initPage("products", "محصولات")) return;
+            this.load();
+            this.render();
+            this.renderStats();
+        },
+
+        load() {
+            this.state.products = AdminApp.getProducts();
+        },
+
+        saveAll() {
+            AdminApp.saveProducts(this.state.products);
+            // به‌روزرسانی ALL_PRODUCTS
+            if (Array.isArray(window.ALL_PRODUCTS)) {
+                window.ALL_PRODUCTS.length = 0;
+                window.ALL_PRODUCTS.push(...this.state.products);
+            }
+        },
+
+        search(t) {
+            this.state.search = (t || "").trim().toLowerCase();
+            this.render();
+        },
+
+        filterCategory(c) {
+            this.state.filterCat = c;
+            this.render();
+        },
+
+        filterDemo(v) {
+            this.state.filterDemo = v;
+            this.render();
+        },
+
+        getFiltered() {
+            let list = [...this.state.products];
+            const t = this.state.search;
+            if (t) {
+                list = list.filter(p =>
+                    (p.name || "").toLowerCase().includes(t) ||
+                    (p.shortName || "").toLowerCase().includes(t) ||
+                    (p.brand || "").toLowerCase().includes(t)
+                );
+            }
+            if (this.state.filterCat) {
+                list = list.filter(p => p.category === this.state.filterCat);
+            }
+            if (this.state.filterDemo === "demo") {
+                list = list.filter(p => p.isDemo === true);
+            } else if (this.state.filterDemo === "official") {
+                list = list.filter(p => !p.priceReviewRequired && !p.isDemo);
+            }
+            return list;
+        },
+
+        renderStats() {
+            const products = this.state.products;
+            const demo = products.filter(p => p.isDemo).length;
+            const reviewRequired = products.filter(p => p.priceReviewRequired).length;
+            const outOfStock = products.filter(p => p.stock === 0).length;
+
+            const el = document.getElementById("productsStats");
+            if (!el) return;
+
+            el.innerHTML = `
+                <div class="stat-card orange">
+                    <div class="stat-header"><div class="stat-icon"><i class="bi bi-box-seam"></i></div></div>
+                    <div class="stat-value">${products.length.toLocaleString("fa-IR")}</div>
+                    <div class="stat-label">کل محصولات</div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-header"><div class="stat-icon"><i class="bi bi-info-circle"></i></div></div>
+                    <div class="stat-value">${demo.toLocaleString("fa-IR")}</div>
+                    <div class="stat-label">محصولات Demo</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-header"><div class="stat-icon"><i class="bi bi-check-circle"></i></div></div>
+                    <div class="stat-value">${(products.length - reviewRequired).toLocaleString("fa-IR")}</div>
+                    <div class="stat-label">قیمت رسمی</div>
+                </div>
+                <div class="stat-card red">
+                    <div class="stat-header"><div class="stat-icon"><i class="bi bi-x-circle"></i></div></div>
+                    <div class="stat-value">${outOfStock.toLocaleString("fa-IR")}</div>
+                    <div class="stat-label">ناموجود</div>
+                </div>
+            `;
+        },
+
+        render() {
+            const list = this.getFiltered();
+            const el = document.getElementById("productsList");
+            this.renderStats();
+
+            if (list.length === 0) {
+                el.innerHTML = `<div class="admin-empty">
+                    <div class="admin-empty-icon"><i class="bi bi-box-seam"></i></div>
+                    <h4>محصولی یافت نشد</h4>
+                    <p>${this.state.search ? "نتیجه‌ای برای جستجو نیست" : "هنوز محصولی اضافه نشده"}</p>
+                    <button class="btn-primary-admin" onclick="ProductsPage.openAdd()"><i class="bi bi-plus-circle"></i> افزودن محصول</button>
+                </div>`;
+                return;
+            }
+
+            el.innerHTML = `<div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>تصویر</th>
+                            <th>نام</th>
+                            <th>دسته</th>
+                            <th>قیمت</th>
+                            <th>موجودی</th>
+                            <th>وضعیت</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>${list.map(p => this.row(p)).join("")}</tbody>
+                </table>
+            </div>`;
+        },
+
+        row(p) {
+            const catLabels = { mobile: "موبایل", laptop: "لپ‌تاپ", tablet: "تبلت", watch: "ساعت", accessory: "لوازم" };
+            const isDemo = p.isDemo === true;
+
+            return `<tr>
+                <td><img src="${AdminApp.escape(p.image || '../images/products/placeholder-product.svg')}" style="width:50px;height:50px;border-radius:10px;object-fit:cover;background:#f8fafc;" onerror="this.onerror=null;this.src='../images/products/placeholder-product.svg'"></td>
+                <td>
+                    <div style="font-weight:700;">${AdminApp.escape(p.shortName || p.name)}</div>
+                    <div style="font-size:0.72rem;color:#94a3b8;">${AdminApp.escape(p.brand || "")}</div>
+                </td>
+                <td>${catLabels[p.category] || "—"}</td>
+                <td>${AdminApp.formatPrice(p.price)}${p.priceReviewRequired ? ' <span class="status-badge warning" style="font-size:0.65rem;">تأیید</span>' : ''}</td>
+                <td>${(p.stock || 0).toLocaleString("fa-IR")}</td>
+                <td>
+                    ${p.stock > 0 ? '<span class="status-badge success">موجود</span>' : '<span class="status-badge danger">ناموجود</span>'}
+                    ${isDemo ? '<span class="status-badge info" style="font-size:0.65rem;">Demo</span>' : ''}
+                </td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="action-btn-sm edit" onclick="ProductsPage.openEdit(${p.id})" title="ویرایش"><i class="bi bi-pencil"></i></button>
+                        <button class="action-btn-sm delete" onclick="ProductsPage.remove(${p.id})" title="حذف"><i class="bi bi-trash"></i></button>
+                    </div>
+                </td>
+            </tr>`;
+        },
+
+        openAdd() {
+            this.state.editingId = null;
+            document.getElementById("productModalTitle").textContent = "محصول جدید";
+            this.clear();
+            this.watchCat();
+            AdminApp.openModal("productModal");
+        },
+
+        openEdit(id) {
+            const p = this.state.products.find(x => String(x.id) === String(id));
+            if (!p) return;
+            this.state.editingId = id;
+            document.getElementById("productModalTitle").textContent = "ویرایش محصول";
+
+            const set = (elId, val) => { const e = document.getElementById(elId); if (e) e.value = val == null ? "" : val; };
+            set("pName", p.name); set("pShortName", p.shortName); set("pBrand", p.brand);
+            set("pCategory", p.category); set("pSubcategory", p.subcategory || "");
+            set("pPrice", p.price); set("pOldPrice", p.oldPrice); set("pStock", p.stock);
+            set("pRating", p.rating); set("pReviewCount", p.reviewCount);
+            set("pWarranty", p.warranty); set("pImage", p.image);
+            set("pColors", (p.colors || []).join("، "));
+            set("pHighlights", (p.highlights || []).join("، "));
+            set("pDesc", p.desc);
+            document.getElementById("pIsNew").checked = !!p.isNew;
+            document.getElementById("pIsBestseller").checked = !!p.isBestseller;
+            document.getElementById("pIsFeatured").checked = !!p.isFeatured;
+            document.getElementById("pIsSpecialSale").checked = !!p.isSpecialSale;
+            document.getElementById("pIsDemo").checked = !!p.isDemo;
+            document.getElementById("pPriceReviewRequired").checked = !!p.priceReviewRequired;
+            this.watchCat();
+            AdminApp.openModal("productModal");
+        },
+
+        watchCat() {
+            const cat = document.getElementById("pCategory");
+            const sub = document.getElementById("subWrap");
+            sub.style.display = cat.value === "accessory" ? "block" : "none";
+        },
+
+        clear() {
+            ["pName","pShortName","pBrand","pOldPrice","pImage","pColors","pHighlights","pDesc","pWarranty"].forEach(id => {
+                const e = document.getElementById(id); if (e) e.value = "";
+            });
+            document.getElementById("pCategory").value = "";
+            document.getElementById("pSubcategory").value = "";
+            document.getElementById("pPrice").value = "";
+            document.getElementById("pStock").value = "10";
+            document.getElementById("pRating").value = "4.5";
+            document.getElementById("pReviewCount").value = "0";
+            ["pIsNew","pIsBestseller","pIsFeatured","pIsSpecialSale","pIsDemo","pPriceReviewRequired"].forEach(id => {
+                const e = document.getElementById(id); if (e) e.checked = false;
+            });
+        },
+
+        save() {
+            const name = document.getElementById("pName").value.trim();
+            const shortName = document.getElementById("pShortName").value.trim();
+            const category = document.getElementById("pCategory").value;
+            const brand = document.getElementById("pBrand").value.trim();
+            const price = parseInt(document.getElementById("pPrice").value, 10);
+            const image = document.getElementById("pImage").value.trim();
+
+            if (!name) return AdminApp.toast("نام الزامی است", "error");
+            if (!shortName) return AdminApp.toast("نام کوتاه الزامی است", "error");
+            if (!category) return AdminApp.toast("دسته الزامی است", "error");
+            if (!brand) return AdminApp.toast("برند الزامی است", "error");
+            if (!price || price <= 0) return AdminApp.toast("قیمت معتبر وارد کنید", "error");
+            if (!image) return AdminApp.toast("لینک تصویر الزامی است", "error");
+
+            const oldPriceValue = parseInt(document.getElementById("pOldPrice").value, 10) || null;
+            if (oldPriceValue && oldPriceValue <= price) return AdminApp.toast("قیمت قبل از تخفیف باید بیشتر باشد", "error");
+
+            const data = {
+                name, shortName, category,
+                subcategory: category === "accessory" ? document.getElementById("pSubcategory").value : undefined,
+                brand: brand.toLowerCase(), price, oldPrice: oldPriceValue,
+                stock: parseInt(document.getElementById("pStock").value, 10) || 0,
+                rating: parseFloat(document.getElementById("pRating").value) || 4.5,
+                reviewCount: parseInt(document.getElementById("pReviewCount").value, 10) || 0,
+                warranty: document.getElementById("pWarranty").value.trim() || "۱۸ ماه گارانتی",
+                seller: "بلو مارکت",
+                image, images: [image],
+                colors: document.getElementById("pColors").value.split(/[،,]/).map(s => s.trim()).filter(Boolean),
+                highlights: document.getElementById("pHighlights").value.split(/[،,]/).map(s => s.trim()).filter(Boolean),
+                desc: document.getElementById("pDesc").value.trim(),
+                isNew: document.getElementById("pIsNew").checked,
+                isBestseller: document.getElementById("pIsBestseller").checked,
+                isFeatured: document.getElementById("pIsFeatured").checked,
+                isSpecialSale: document.getElementById("pIsSpecialSale").checked,
+                isDemo: document.getElementById("pIsDemo").checked,
+                priceReviewRequired: document.getElementById("pPriceReviewRequired").checked,
+                specs: {},
+            };
+
+            if (this.state.editingId) {
+                const idx = this.state.products.findIndex(x => x.id === this.state.editingId);
+                if (idx >= 0) this.state.products[idx] = { ...this.state.products[idx], ...data };
+                AdminApp.toast("محصول ویرایش شد", "success");
+            } else {
+                const newId = Math.max(0, ...this.state.products.map(x => x.id || 0)) + 1;
+                this.state.products.push({ id: newId, ...data });
+                AdminApp.toast("محصول اضافه شد", "success");
+            }
+
+            this.saveAll();
+            AdminApp.closeModal("productModal");
+            this.render();
+        },
+
+        remove(id) {
+            const p = this.state.products.find(x => String(x.id) === String(id));
+            if (!p) return;
+            AdminApp.customConfirm(`«${p.shortName || p.name}» حذف شود؟`, () => {
+                this.state.products = this.state.products.filter(x => String(x.id) !== String(id));
+                this.saveAll();
+                this.render();
+                AdminApp.toast("محصول حذف شد", "success");
+            });
+        },
+    };
+
+    document.addEventListener("DOMContentLoaded", () => ProductsPage.init());
+    </script>
+</body>
+</html>

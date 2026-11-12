@@ -1,0 +1,874 @@
+/* ========================================
+   Glassmorphism Effect — موبایلی بلوچستان
+   هدر و فوتر شیشه‌ای معلق
+   ======================================== */
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-bg-dark: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.35);
+    --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+    --glass-blur: blur(18px) saturate(180%);
+    --orange-glow: 0 8px 32px rgba(249, 115, 22, 0.18);
+}
+
+/* ========== هدر شیشه‌ای معلق ========== */
+.glass-header-wrapper {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 24px);
+    max-width: 1280px;
+    z-index: 1040;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.glass-header-wrapper > * {
+    pointer-events: auto;
+}
+
+.glass-header {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    padding: 8px 20px;
+    transition: all 0.35s ease;
+}
+
+.glass-header-wrapper.scrolled .glass-header {
+    background: var(--glass-bg-dark);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.18);
+    padding: 6px 20px;
+}
+
+/* برند داخل هدر */
+.glass-header .navbar-brand h2 {
+    font-size: 1.35rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #ff6b35;
+    font-weight: 800;
+}
+
+.glass-header .navbar-brand i {
+    background: linear-gradient(135deg, #ff6b35, #ff8a65);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* لینک‌های ناوبری */
+.glass-nav-link {
+    color: #333;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.glass-nav-link:hover,
+.glass-nav-link.active {
+    background: rgba(249, 115, 22, 0.1);
+    color: #f97316;
+}
+
+/* سرچ باکس شیشه‌ای */
+.glass-search {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(249, 115, 22, 0.15);
+    border-radius: 14px;
+    padding: 4px 4px 4px 14px;
+    transition: all 0.25s ease;
+    min-width: 240px;
+}
+
+.glass-search:focus-within {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #f97316;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.08);
+}
+
+.glass-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 8px 0;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.glass-search input::placeholder {
+    color: #999;
+}
+
+.glass-search button {
+    background: linear-gradient(135deg, #ff6b35, #ff8a65);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-right: auto;
+}
+
+.glass-search button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
+}
+
+/* دکمه سبد خرید شیشه‌ای */
+.glass-cart-btn {
+    position: relative;
+    background: linear-gradient(135deg, #ff6b35, #ff8a65);
+    color: white !important;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
+}
+
+.glass-cart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(249, 115, 22, 0.4);
+    color: white;
+}
+
+.glass-cart-btn .badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #fff;
+    color: #f97316;
+    font-size: 10px;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #f97316;
+}
+
+/* ========== مگامنو شیشه‌ای ========== */
+.glass-mega-menu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1050;
+}
+
+.glass-menu-parent:hover .glass-mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.glass-menu-parent {
+    position: relative;
+}
+
+/* ستون‌های مگامنو */
+.glass-mega-col h4 {
+    color: #f97316;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 2px solid rgba(249, 115, 22, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.glass-mega-col h4 i {
+    color: #f97316;
+}
+
+.glass-mega-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.glass-mega-col ul li {
+    margin-bottom: 6px;
+}
+
+.glass-mega-col ul li a {
+    color: #555;
+    font-size: 0.88rem;
+    text-decoration: none;
+    padding: 6px 0;
+    display: block;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    padding-right: 0;
+}
+
+.glass-mega-col ul li a:hover {
+    color: #f97316;
+    padding-right: 8px;
+}
+
+/* ========== فوتر شیشه‌ای ========== */
+.glass-footer-wrapper {
+    position: relative;
+    margin-top: 80px;
+    padding: 0 12px 12px;
+}
+
+.glass-footer {
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.92), rgba(17, 24, 39, 0.94));
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    padding: 50px 40px 20px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #f97316, #ff8a65, #f97316, transparent);
+    animation: shimmer 4s ease-in-out infinite;
+    background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.glass-footer .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: transparent;
+    padding: 0;
+    border: none;
+}
+
+.glass-footer .footer-column h3 {
+    color: #f97316;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.glass-footer .footer-column h3::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: linear-gradient(180deg, #f97316, #ff8a65);
+    border-radius: 2px;
+}
+
+.glass-footer .footer-column p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
+    font-size: 0.92rem;
+}
+
+.glass-footer .footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.glass-footer .footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.glass-footer .footer-column ul li a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 0;
+}
+
+.glass-footer .footer-column ul li a::before {
+    content: '›';
+    color: #f97316;
+    font-weight: 700;
+    transition: transform 0.25s ease;
+    display: inline-block;
+}
+
+.glass-footer .footer-column ul li a:hover {
+    color: #f97316;
+    transform: translateX(-4px);
+}
+
+.glass-footer .footer-column ul li a:hover::before {
+    transform: translateX(2px);
+}
+
+.glass-footer .copyright {
+    text-align: center;
+    padding: 24px 0 0;
+    margin-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.88rem;
+    background: transparent;
+}
+
+/* ========== ریسپانسیو هدر شیشه‌ای ========== */
+@media (max-width: 991px) {
+    .glass-header-wrapper {
+        top: 8px;
+        width: calc(100% - 16px);
+    }
+
+    .glass-header {
+        padding: 6px 14px;
+        border-radius: 16px;
+    }
+
+    .glass-header .navbar-brand h2 {
+        font-size: 1.1rem;
+    }
+
+    .glass-search {
+        min-width: 0;
+        flex: 1;
+    }
+}
+
+@media (max-width: 576px) {
+    .glass-header-wrapper {
+        top: 6px;
+        width: calc(100% - 12px);
+    }
+
+    .glass-header {
+        padding: 6px 10px;
+    }
+}
+
+/* ========== پشتیبانی مرورگرهای قدیمی ========== */
+@supports not (backdrop-filter: blur(10px)) {
+    .glass-header,
+    .glass-footer,
+    .glass-mega-menu {
+        background: rgba(255, 255, 255, 0.96);
+    }
+
+    .glass-footer {
+        background: linear-gradient(135deg, #1f2937, #111827);
+    }
+}
+
+/* ========== جابجایی بدنه برای هدر معلق ========== */
+body.glass-body {
+    padding-top: 90px;
+}
+
+@media (max-width: 991px) {
+    body.glass-body {
+        padding-top: 80px;
+    }
+}
+
+/* ====== تجربه کاربری نسل جدید ====== */
+.glass-mega-menu-pro{grid-template-columns:repeat(5,minmax(0,1fr));width:min(1180px,calc(100vw - 48px));padding:26px;gap:22px;border:1px solid rgba(255,255,255,.8);background:rgba(255,255,255,.82);box-shadow:0 28px 80px rgba(20,30,55,.18),inset 0 1px rgba(255,255,255,.9);}
+.glass-mega-menu-pro .glass-mega-col{min-width:0;padding:4px 8px;border-left:1px solid rgba(249,115,22,.10)}
+.glass-mega-menu-pro .glass-mega-col:last-child{border-left:0}
+.glass-mega-menu-pro .glass-mega-col h4{font-size:14px;white-space:nowrap}
+.glass-mega-menu-pro .glass-mega-col a{display:block;padding:7px 9px;border-radius:9px;font-size:12px;transition:.2s}
+.glass-mega-menu-pro .glass-mega-col a:hover{background:linear-gradient(100deg,rgba(255,107,53,.13),rgba(255,255,255,.6));color:#e95a24;transform:translateX(-3px)}
+.mobile-menu-group-toggle{width:100%;display:flex;align-items:center;gap:10px;padding:13px 18px;border:0;background:transparent;color:inherit;font:inherit;text-align:right;font-weight:800}
+.mobile-menu-group-toggle .bi-chevron-down{margin-right:auto;transition:transform .2s}
+.mobile-menu-group.expanded .mobile-menu-group-toggle .bi-chevron-down{transform:rotate(180deg)}
+.mobile-menu-sublist{display:none;padding:4px 18px 12px 12px;background:rgba(249,115,22,.045)}
+.mobile-menu-group.expanded .mobile-menu-sublist{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.mobile-menu-sublist a{padding:10px;border-radius:10px;background:rgba(255,255,255,.72);font-size:12px;text-decoration:none;color:#475569}
+.accessory-quick-cats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:0 0 26px}
+.accessory-quick-cats a{display:flex;align-items:center;gap:10px;min-height:66px;padding:13px;border-radius:18px;text-decoration:none;color:#263449;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 26px rgba(31,41,55,.055);backdrop-filter:blur(16px);transition:.25s}
+.accessory-quick-cats a:hover{transform:translateY(-4px);border-color:rgba(249,115,22,.32);box-shadow:0 15px 34px rgba(249,115,22,.12);color:#f97316}
+.accessory-quick-cats i{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#fff0e7,#fff);color:#f97316;font-size:19px}
+.glass-product-card{border:1px solid rgba(255,255,255,.9);background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,255,255,.68));backdrop-filter:blur(18px);box-shadow:0 10px 28px rgba(35,45,65,.06);transition:transform .28s,box-shadow .28s,border-color .28s;overflow:hidden}
+.glass-product-card:hover{transform:translateY(-7px);border-color:rgba(249,115,22,.28);box-shadow:0 22px 48px rgba(35,45,65,.13)}
+.glass-product-card .product-image{background:radial-gradient(circle at 50% 40%,#fff 0,rgba(255,246,239,.92) 65%,rgba(255,255,255,.5) 100%)}
+.glass-product-card .product-image img{transition:transform .35s;object-fit:contain}
+.glass-product-card:hover .product-image img{transform:scale(1.045)}
+.glass-product-card .badge-new,.glass-product-card .badge-discount{backdrop-filter:blur(12px);box-shadow:0 6px 16px rgba(15,23,42,.12)}
+.discount-section{position:relative;overflow:hidden;background:linear-gradient(130deg,rgba(255,239,228,.9),rgba(255,255,255,.8));border-top:1px solid rgba(255,255,255,.8);border-bottom:1px solid rgba(249,115,22,.12)}
+.discount-container{position:relative;border:1px solid rgba(255,255,255,.8);border-radius:28px;background:rgba(255,255,255,.48);backdrop-filter:blur(20px);box-shadow:0 22px 60px rgba(249,115,22,.09);padding:22px}
+.discount-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.discount-header .section-title{font-weight:900;letter-spacing:-.4px}
+.discount-products{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:14px 4px 20px}
+.discount-products::-webkit-scrollbar{display:none}
+.discount-products>*{flex:0 0 min(245px,78vw);scroll-snap-align:start}
+.discount-products .glass-product-card{border-radius:22px}
+.discount-products .product-image{height:190px;border-radius:18px 18px 0 0}
+.product-lightbox{position:fixed;inset:0;z-index:100500;display:none;align-items:center;justify-content:center;padding:5vh 6vw;background:rgba(12,18,30,.94);backdrop-filter:blur(22px)}
+.product-lightbox.open{display:flex}
+.product-lightbox>img{max-width:min(76vw,980px);max-height:78vh;object-fit:contain;border-radius:18px;filter:drop-shadow(0 24px 55px rgba(0,0,0,.35))}
+.lightbox-close{position:absolute;top:22px;right:22px;width:52px;height:52px;border:1px solid rgba(255,255,255,.45);border-radius:17px;color:white;background:rgba(255,255,255,.16);backdrop-filter:blur(18px);box-shadow:0 10px 30px #0003;font-size:20px;display:grid;place-items:center;cursor:pointer}
+.lightbox-close:hover{background:rgba(255,107,53,.8);transform:scale(1.04)}
+.lightbox-arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:1px solid #ffffff55;border-radius:16px;background:#ffffff18;color:#fff;backdrop-filter:blur(14px);font-size:20px;display:grid;place-items:center;cursor:pointer}
+.lightbox-arrow.prev{right:24px}.lightbox-arrow.next{left:24px}
+.lightbox-counter{position:absolute;bottom:82px;left:50%;transform:translateX(-50%);color:#fff;background:#ffffff20;border:1px solid #ffffff35;border-radius:30px;padding:7px 15px;font-size:12px;backdrop-filter:blur(12px)}
+.lightbox-thumbs{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px;max-width:80vw;overflow-x:auto;padding:5px}
+.lightbox-thumb{width:52px;height:52px;flex:0 0 52px;border:1px solid #ffffff55;border-radius:12px;padding:3px;background:#ffffff20;cursor:pointer;opacity:.65}
+.lightbox-thumb.active{opacity:1;border:2px solid #ff8b55;background:#fff}
+.lightbox-thumb img{width:100%;height:100%;object-fit:contain}
+body.lightbox-open{overflow:hidden}
+.glass-review-box{padding:22px;border-radius:22px;background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);box-shadow:0 12px 34px rgba(30,41,59,.06);margin-bottom:18px}
+.review-form-grid{display:grid;grid-template-columns:180px 1fr;gap:12px;margin:16px 0}
+.review-form-grid label{display:flex;flex-direction:column;gap:7px;font-size:12px;font-weight:800;color:#475569}
+.review-form-grid input,.review-form-grid select,.review-form-grid textarea{width:100%;border:1px solid #e2e8f0;border-radius:12px;padding:11px;background:#fff;font:inherit;outline:none}
+.review-full{grid-column:1/-1}
+.product-review-card{padding:18px;border:1px solid #edf0f5;border-radius:18px;background:#fff;margin:12px 0}
+.review-card-head{display:flex;justify-content:space-between;gap:12px}.review-card-head span{color:#f59e0b;letter-spacing:2px}
+.product-review-card p{margin:8px 0;color:#475569;line-height:1.9}
+@media(max-width:1100px){.glass-mega-menu-pro{grid-template-columns:repeat(3,minmax(0,1fr));max-height:75vh;overflow:auto}}
+@media(max-width:767px){.accessory-quick-cats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.accessory-quick-cats a{min-height:58px;padding:9px;font-size:12px}.accessory-quick-cats i{width:34px;height:34px}.discount-container{padding:14px;border-radius:20px}.discount-products>*{flex-basis:72vw}.product-lightbox{padding:0 12px}.product-lightbox>img{max-width:94vw;max-height:70vh}.lightbox-close{top:12px;right:12px;width:44px;height:44px;border-radius:14px}.lightbox-arrow.prev{right:10px}.lightbox-arrow.next{left:10px}.lightbox-arrow{width:40px;height:40px}.lightbox-thumbs{bottom:12px;max-width:94vw}.lightbox-counter{bottom:75px}.review-form-grid{grid-template-columns:1fr}.review-full{grid-column:auto}}
+
+.price-review-note{display:block;margin-top:4px;font-size:10px;color:#9a6b42;font-weight:600}.glass-header .navbar-brand h2{display:flex;align-items:center;gap:10px}.glass-header .navbar-brand h2 img{width:38px;height:38px;object-fit:contain;border-radius:12px;box-shadow:0 6px 18px rgba(249,115,22,.18)}
+
+.badge-featured{position:absolute;top:12px;right:12px;z-index:2;padding:5px 9px;border-radius:20px;background:rgba(255,255,255,.78);color:#b45309;border:1px solid rgba(251,146,60,.25);backdrop-filter:blur(12px);font-size:10px;font-weight:800}.badge-bestseller{position:absolute;top:12px;left:12px;z-index:2;padding:5px 9px;border-radius:20px;background:rgba(15,23,42,.78);color:#fff;border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(12px);font-size:10px;font-weight:800}
+
+.glass-menu-parent:focus-within .glass-mega-menu{opacity:1;visibility:visible;transform:translateY(0)}.glass-nav-link{white-space:nowrap}.glass-mega-menu-pro{right:-20px;left:auto}
+.glass-product-card .badge-featured{top:48px;right:12px}.glass-product-card .badge-bestseller{top:48px;left:12px}
+.accessory-quick-cats{grid-template-columns:repeat(7,minmax(0,1fr))}@media(max-width:1100px){.accessory-quick-cats{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:767px){.accessory-quick-cats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.glass-product-card .badge-special{position:absolute;top:84px;right:12px;z-index:2;padding:5px 9px;border-radius:20px;background:linear-gradient(135deg,rgba(255,107,53,.92),rgba(220,72,32,.88));color:#fff;border:1px solid rgba(255,255,255,.38);backdrop-filter:blur(12px);font-size:10px;font-weight:900;box-shadow:0 7px 18px rgba(234,88,12,.2)}
+
+
+/* ===== اصلاحات نهایی خوانایی و تجربه موبایل ===== */
+.glass-mega-menu-pro{
+  background:rgba(20,29,43,.96)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  box-shadow:0 28px 80px rgba(8,15,28,.34),inset 0 1px rgba(255,255,255,.08)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(145%);
+  backdrop-filter:blur(24px) saturate(145%);
+}
+.glass-mega-menu-pro .glass-mega-col{border-left-color:rgba(255,255,255,.10)!important}
+.glass-mega-menu-pro .glass-mega-col h4{color:#ff9a68!important;border-bottom-color:rgba(255,255,255,.14)!important}
+.glass-mega-menu-pro .glass-mega-col a{color:#e7edf6!important}
+.glass-mega-menu-pro .glass-mega-col a:hover{color:#fff!important;background:rgba(255,130,76,.2)!important}
+.discount-section{padding:clamp(18px,3vw,34px) 0}
+.discount-products{align-items:stretch;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;padding:12px 6px 18px}
+.discount-products>.product-item{flex:0 0 245px;min-width:245px;max-width:245px;scroll-snap-align:start;display:flex}
+.discount-products>.product-item>.glass-product-card{width:100%;height:100%;display:flex;flex-direction:column;cursor:pointer}
+.discount-products .product-image{min-height:180px}
+.discount-products .product-info{flex:1}
+.timer{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(249,115,22,.2);background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border-radius:999px;padding:9px 14px;font-weight:800}
+.timer i{color:#f97316}
+.btn-faq-contact{background:#f97316!important;border-color:#f97316!important;color:#fff!important}
+.payment-option.disabled{pointer-events:none;opacity:.48;cursor:not-allowed}
+.payment-option.disabled input,.payment-option input:disabled{pointer-events:none;cursor:not-allowed}
+.skip-to-content{position:fixed;z-index:100000;top:10px;right:10px;transform:translateY(-160%);padding:11px 16px;border-radius:12px;background:#1f2937;color:#fff;font-weight:800;text-decoration:none;box-shadow:0 8px 24px #0003}
+.skip-to-content:focus{transform:translateY(0);color:#fff}
+@media(max-width:767px){
+ .discount-container{width:calc(100% - 20px);padding:13px;border-radius:20px}
+ .discount-header{align-items:flex-start;flex-direction:column;gap:9px;margin-bottom:8px}
+ .discount-header .section-title,.discount-header h2{font-size:1.15rem;line-height:1.7}
+ .discount-products{gap:11px;margin-inline:-3px;padding:10px 3px 16px}
+ .discount-products>.product-item{flex-basis:78vw;min-width:78vw;max-width:310px}
+ .discount-products .product-image{min-height:160px;aspect-ratio:1.2/1}
+ .discount-products .product-title{font-size:13px;line-height:1.7;min-height:42px}
+ .discount-products .current-price{font-size:13px}
+ .discount-section .slide-btn{width:34px;height:34px}
+ .glass-mega-menu-pro{display:none!important}
+}
+@media(max-width:380px){.discount-products>.product-item{flex-basis:84vw;min-width:84vw}.discount-container{padding:10px}}
+
+/* خوانایی بهتر منوی دسته‌بندی در حالت شناور */
+.glass-mega-menu,.glass-mega-menu-pro,.mega-menu{background:rgba(17,26,40,.97)!important;border:1px solid rgba(255,255,255,.16)!important;box-shadow:0 28px 80px rgba(5,12,24,.42),inset 0 1px rgba(255,255,255,.07)!important;-webkit-backdrop-filter:blur(26px) saturate(145%);backdrop-filter:blur(26px) saturate(145%)}
+.glass-mega-menu a,.glass-mega-menu-pro a,.mega-menu a,.submenu-column a{color:#e9eef7!important}
+.glass-mega-menu a:hover,.glass-mega-menu-pro a:hover,.mega-menu a:hover,.submenu-column a:hover{color:#fff!important;background:rgba(249,115,22,.2)!important}
+.glass-mega-menu h4,.glass-mega-menu-pro h4,.mega-menu h4,.submenu-column h4{color:#ff9a68!important}
+
+@media(max-width:767px){
+ .discount-section{padding:18px 0 24px;overflow:hidden}
+ .discount-container{max-width:100%;margin-inline:auto;box-sizing:border-box}
+ .discount-header{width:100%;min-width:0;align-items:stretch}
+ .discount-header>*{max-width:100%;min-width:0}
+ .discount-products{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;display:flex;flex-wrap:nowrap;direction:rtl;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+ .discount-products>.product-item{flex:0 0 min(78vw,290px);width:min(78vw,290px);min-width:min(78vw,290px);max-width:min(78vw,290px)}
+ .discount-products .glass-product-card{min-width:0;overflow:hidden}
+ .discount-products .product-image{height:160px;min-height:160px}
+ .discount-products .product-info{padding:12px}
+ .discount-products .product-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+ .discount-header .timer,.discount-header .countdown,.discount-header .discount-timer{max-width:100%;flex-wrap:wrap;font-size:12px}
+}
+
+/* ===== اصلاحات تکمیلی درخواست موبایل: سبد آیکونی، اسلایدر تخفیف و فیلتر همه ===== */
+.glass-header .glass-cart-btn{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;
+  width:52px;height:48px;min-width:52px;padding:0!important;border-radius:16px;
+  gap:0;font-size:21px;line-height:1;white-space:nowrap;
+}
+.glass-header .glass-cart-btn .cart-badge{
+  position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;
+  display:none;align-items:center;justify-content:center;border:2px solid #fff;
+  border-radius:999px;background:#ef4444;color:#fff;font-size:10px;font-weight:900;
+  line-height:1;box-shadow:0 3px 10px #ef444455;
+}
+.all-products-filter{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin:0 0 8px;padding:11px 12px;border:1px solid rgba(249,115,22,.18);
+  border-radius:13px;background:rgba(255,255,255,.76);color:#263449;
+  font:inherit;font-size:13px;font-weight:800;text-align:right;cursor:pointer;
+  transition:background .2s,border-color .2s,box-shadow .2s,color .2s;
+}
+.all-products-filter>span:first-child{display:flex;align-items:center;gap:9px}
+.all-products-filter>span:first-child i{color:#f97316}
+.all-products-filter.active,.all-products-filter:hover{
+  color:#9a3412;background:linear-gradient(135deg,#fff1e8,#fff9f4);
+  border-color:rgba(249,115,22,.55);box-shadow:0 5px 16px rgba(249,115,22,.10)
+}
+.all-products-filter .count-badge{flex:0 0 auto}
+
+/* اسلایدر تخفیف: کارت‌ها در موبایل کامل و بدون بریدگی افقی */
+.discount-section{width:100%;max-width:100%;overflow:hidden}
+.discount-container{width:min(95%,1400px);max-width:1400px;min-width:0;box-sizing:border-box}
+.discount-section .slider-wrapper{width:100%;min-width:0;overflow:hidden}
+.discount-products{box-sizing:border-box;width:100%;min-width:0;min-height:0;align-items:stretch;justify-content:flex-start;direction:rtl}
+.discount-products>.product-item{box-sizing:border-box;flex-shrink:0}
+.discount-products>.product-item>.glass-product-card{min-width:0;overflow:hidden}
+.discount-products .product-image img{display:block;width:100%;max-width:100%;object-fit:contain}
+@media(max-width:767px){
+  .discount-section{padding:16px 0 22px!important}
+  .discount-container{width:calc(100% - 20px)!important;max-width:100%!important;padding:14px!important;border-radius:22px!important;overflow:hidden}
+  .discount-header{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:8px!important;margin:0 0 10px!important}
+  .discount-header .section-title,.discount-header h2{font-size:clamp(17px,4.8vw,21px)!important;line-height:1.6!important;margin:0!important}
+  .discount-header .timer{display:flex!important;align-items:center;justify-content:center;width:100%;max-width:100%;box-sizing:border-box;white-space:normal;text-align:center;font-size:12px!important;padding:9px 12px!important}
+  .discount-section .slider-wrapper{display:block!important;overflow:hidden!important;padding:0!important}
+  .discount-products{display:flex!important;flex-flow:row nowrap!important;gap:12px!important;width:100%!important;max-width:100%!important;margin:0!important;padding:8px 2px 16px!important;overflow-x:auto!important;overflow-y:hidden!important;scroll-snap-type:x mandatory!important;scroll-padding-inline:2px;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain}
+  .discount-products>.product-item{flex:0 0 min(86vw,350px)!important;width:min(86vw,350px)!important;min-width:min(86vw,350px)!important;max-width:min(86vw,350px)!important;scroll-snap-align:start!important}
+  .discount-products>.product-item>.glass-product-card{width:100%!important;height:100%!important;min-width:0!important;border-radius:19px!important}
+  .discount-products .product-image{height:clamp(145px,42vw,190px)!important;min-height:0!important;aspect-ratio:auto!important;overflow:hidden!important}
+  .discount-products .product-image img{height:100%!important;max-height:100%!important;object-fit:contain!important}
+  .discount-products .product-info{min-width:0!important;padding:12px!important}
+  .discount-products .product-title{font-size:13px!important;line-height:1.8!important;min-height:46px!important;overflow-wrap:anywhere!important}
+  .discount-products .price-container{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 8px}
+  .discount-products .current-price,.discount-products .old-price{font-size:12px!important;overflow-wrap:anywhere}
+  .discount-section .slide-btn{display:none!important}
+}
+@media(max-width:380px){
+  .discount-container{width:calc(100% - 14px)!important;padding:10px!important}
+  .discount-products>.product-item{flex-basis:88vw!important;width:88vw!important;min-width:88vw!important;max-width:88vw!important}
+}
+@media(max-width:600px){
+  .mobile-bottom-nav .bottom-nav-item[data-nav="cart"] small{display:none!important}
+  .mobile-bottom-nav .bottom-nav-item[data-nav="cart"]{gap:0}
+  .mobile-bottom-nav .bottom-nav-item[data-nav="cart"]>i{font-size:1.55rem}
+}
+
+
+/* اصلاح نهایی ناوبری موبایل، اسلایدر تخفیف و چیدمان سفارش */
+@media(max-width:991px){
+  .mobile-bottom-nav{display:flex!important;position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:1060!important;height:68px!important;padding:7px 8px calc(7px + env(safe-area-inset-bottom,0px))!important;background:rgba(255,255,255,.96)!important;border-top:1px solid rgba(249,115,22,.22)!important;box-shadow:0 -8px 28px rgba(20,30,50,.12)!important;backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;visibility:visible!important;opacity:1!important}
+  .mobile-bottom-nav .bottom-nav-item{display:flex!important;flex:1 1 25%!important;min-width:0!important;height:100%!important;gap:3px!important;color:#667085!important;text-decoration:none!important}
+  .mobile-bottom-nav .bottom-nav-item small{display:block!important;font-size:11px!important;font-weight:800!important}
+  .mobile-bottom-nav .bottom-nav-item.active{color:#f97316!important}
+  .mobile-bottom-nav .bottom-nav-item[data-nav=cart] small{display:block!important;font-size:10px!important}
+  body{padding-bottom:88px!important}
+}
+@media(max-width:767px){
+  .discount-section .slider-wrapper{position:relative!important;padding-inline:0!important}
+  .discount-section .slide-btn{display:flex!important;position:absolute!important;z-index:5!important;top:43%!important;width:36px!important;height:36px!important;align-items:center!important;justify-content:center!important;border:1px solid rgba(249,115,22,.35)!important;border-radius:50%!important;background:rgba(255,255,255,.94)!important;color:#ea580c!important;box-shadow:0 5px 16px rgba(31,41,55,.15)!important;opacity:1!important}
+  .discount-section .slide-btn.prev{right:4px!important;left:auto!important}
+  .discount-section .slide-btn.next{left:4px!important;right:auto!important}
+  .discount-header .timer{min-height:38px!important;display:flex!important;flex-wrap:wrap!important;gap:6px 9px!important;align-items:center!important;justify-content:center!important;line-height:1.6!important}
+  .discount-header .timer b{background:#fff1e8;border:1px solid #fed7aa;border-radius:8px;padding:2px 7px;color:#c2410c!important;font-variant-numeric:tabular-nums}
+}
+@media(min-width:992px){.cart-register-order,.cart-actions-bottom .checkout-btn{width:auto!important;min-width:190px!important;max-width:260px!important;padding:12px 24px!important;font-size:15px!important;min-height:46px!important;flex:0 0 auto!important}}
+.address-modal-backdrop{display:none;position:fixed;inset:0;z-index:1100;align-items:center;justify-content:center;padding:16px;background:rgba(15,23,42,.58);backdrop-filter:blur(5px)}
+.address-modal-backdrop.show{display:flex!important}
+.address-modal-box{max-height:calc(100dvh - 32px)!important;overflow:auto!important;width:min(520px,100%)!important}
+.address-modal-open{overflow:hidden!important}
+@media(max-width:575px){.address-modal-backdrop{padding:10px!important;align-items:center!important}.address-modal-box .address-modal-body{padding:16px!important}.address-modal-box .address-modal-header,.address-modal-box .address-modal-footer{padding:14px 16px!important}.address-modal-box .row[style*="grid-template-columns"]{grid-template-columns:1fr!important}}
+
+
+/* Mobile bottom navigation: reliable across every customer page */
+@media (max-width: 991px){
+  body .mobile-bottom-nav{display:flex!important;visibility:visible!important;opacity:1!important;position:fixed!important;inset:auto 0 0 0!important;z-index:2500!important;height:calc(68px + env(safe-area-inset-bottom,0px))!important;padding:7px 8px calc(7px + env(safe-area-inset-bottom,0px))!important;align-items:center!important;justify-content:space-around!important;background:rgba(255,255,255,.97)!important;border-top:1px solid rgba(249,115,22,.2)!important;box-shadow:0 -8px 30px rgba(15,23,42,.14)!important;backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important}
+  body .mobile-bottom-nav .bottom-nav-item{display:flex!important;visibility:visible!important;opacity:1!important;position:relative!important;flex:1 1 25%!important;min-width:0!important;min-height:52px!important;align-items:center!important;justify-content:center!important;flex-direction:column!important;gap:3px!important;color:#64748b!important;text-decoration:none!important}
+  body .mobile-bottom-nav .bottom-nav-item i{font-size:22px!important;line-height:1.2!important}
+  body .mobile-bottom-nav .bottom-nav-item small{display:block!important;font-size:11px!important;font-weight:800!important}
+  body .mobile-bottom-nav .bottom-nav-item.active{color:#f97316!important}
+  body .mobile-bottom-nav .bottom-nav-item .cart-badge{display:flex;position:absolute;top:0;right:calc(50% - 23px);min-width:17px;height:17px;border-radius:10px;background:#ef4444;color:#fff;font-size:10px;align-items:center;justify-content:center}
+  body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))!important}
+}
+
+
+/* ==========================================================
+   MOBILE NAVIGATION — premium animated glass dock
+   Four clear destinations: Home / Shop / Cart / Profile
+   ========================================================== */
+@media (max-width: 991px) {
+  body {
+    padding-bottom: calc(94px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  body .mobile-bottom-nav {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    justify-content: stretch !important;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+    box-sizing: border-box !important;
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px)) !important;
+    gap: 4px !important;
+    overflow: visible !important;
+    z-index: 2500 !important;
+    background: rgba(255, 255, 255, .91) !important;
+    border: 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, .9) !important;
+    box-shadow: 0 -10px 36px rgba(28, 39, 59, .13), 0 -2px 10px rgba(249, 115, 22, .06) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+    backdrop-filter: saturate(180%) blur(24px) !important;
+    isolation: isolate;
+    transform: translateZ(0);
+    animation: mobileDockEnter .55s cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  body .mobile-bottom-nav::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 0;
+    background: linear-gradient(90deg, #fb923c 0%, #f97316 35%, #ec4899 68%, #fb923c 100%);
+    background-size: 220% 100%;
+    animation: navGradientFlow 5s linear infinite;
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item {
+    position: relative !important;
+    display: flex !important;
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 58px !important;
+    height: 58px !important;
+    padding: 5px 2px 3px !important;
+    margin: 0 !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    color: #778196 !important;
+    text-decoration: none !important;
+    border: 0 !important;
+    border-radius: 18px !important;
+    background: transparent !important;
+    -webkit-tap-highlight-color: transparent;
+    transition: color .24s ease, transform .24s ease, background .24s ease !important;
+    outline: none !important;
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item::before {
+    content: "";
+    position: absolute;
+    width: 46px;
+    height: 30px;
+    top: 3px;
+    left: 50%;
+    border-radius: 13px;
+    background: linear-gradient(135deg, rgba(255, 237, 213, .98), rgba(255, 247, 237, .72));
+    opacity: 0;
+    transform: translateX(-50%) scale(.62);
+    transition: opacity .25s ease, transform .32s cubic-bezier(.2,.8,.2,1);
+    z-index: -1;
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -1px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #f97316;
+    opacity: 0;
+    transform: translateX(-50%) scale(.3);
+    transition: opacity .2s ease, transform .25s ease;
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item i {
+    display: block !important;
+    position: relative;
+    z-index: 1;
+    margin: 0 !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
+    color: inherit !important;
+    transform-origin: 50% 75%;
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), filter .25s ease !important;
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item small {
+    display: block !important;
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0 !important;
+    font-family: inherit !important;
+    font-size: 10.5px !important;
+    line-height: 1.35 !important;
+    font-weight: 800 !important;
+    color: inherit !important;
+    transition: transform .24s ease, opacity .24s ease;
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item.active {
+    color: #ea580c !important;
+    background: transparent !important;
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item.active::before {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item.active::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item.active i {
+    transform: translateY(-2px) scale(1.12);
+    filter: drop-shadow(0 3px 5px rgba(249, 115, 22, .2));
+    animation: navIconPop .42s cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item.active small {
+    transform: translateY(-1px);
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item:active {
+    transform: scale(.92);
+    background: rgba(249, 115, 22, .07) !important;
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item[data-nav="cart"] .cart-badge {
+    display: none;
+    position: absolute !important;
+    top: 0 !important;
+    left: calc(50% + 5px) !important;
+    right: auto !important;
+    z-index: 3;
+    min-width: 18px !important;
+    width: auto !important;
+    height: 18px !important;
+    padding: 0 5px !important;
+    border: 2px solid #fff !important;
+    border-radius: 20px !important;
+    background: linear-gradient(135deg, #fb3c55, #dc2626) !important;
+    color: #fff !important;
+    font-size: 9px !important;
+    line-height: 14px !important;
+    font-weight: 900 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 3px 9px rgba(220, 38, 38, .28) !important;
+    animation: badgeBounce .35s cubic-bezier(.2,.8,.2,1);
+  }
+
+  body .mobile-bottom-nav .bottom-nav-item[data-nav="cart"] small {
+    display: block !important;
+  }
+}
+
+@keyframes mobileDockEnter {
+  from { opacity: 0; transform: translate3d(0, 22px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes navGradientFlow {
+  from { background-position: 0% 50%; }
+  to { background-position: 220% 50%; }
+}
+@keyframes navIconPop {
+  0% { transform: translateY(2px) scale(.78); }
+  65% { transform: translateY(-4px) scale(1.2); }
+  100% { transform: translateY(-2px) scale(1.12); }
+}
+@keyframes badgeBounce {
+  0% { transform: scale(.5); }
+  70% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-bottom-nav, .mobile-bottom-nav::before,
+  .mobile-bottom-nav .bottom-nav-item,
+  .mobile-bottom-nav .bottom-nav-item i,
+  .mobile-bottom-nav .bottom-nav-item::before,
+  .mobile-bottom-nav .bottom-nav-item::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

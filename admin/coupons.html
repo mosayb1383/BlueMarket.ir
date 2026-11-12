@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کدهای تخفیف | بلو مارکت</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin-common.css">
+    <!-- تقویم شمسی -->
+    <link rel="stylesheet" href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar" id="adminSidebar"></aside>
+        <div class="admin-overlay" id="adminOverlay"></div>
+        <div class="admin-main">
+            <header class="admin-topbar" id="adminTopbar"></header>
+            <main class="admin-content">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3><i class="bi bi-ticket-perforated"></i> مدیریت کدهای تخفیف</h3>
+                        <button class="btn-primary-admin" onclick="CouponsPage.openAdd()">
+                            <i class="bi bi-plus-circle"></i> کد تخفیف جدید
+                        </button>
+                    </div>
+                    <div class="admin-card-body">
+                        <div id="couponsList"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="admin-modal-backdrop" id="couponModal">
+        <div class="admin-modal" style="max-width:550px;">
+            <div class="admin-modal-header">
+                <h4><i class="bi bi-ticket-perforated"></i> <span id="couponModalTitle">کد تخفیف جدید</span></h4>
+                <button class="admin-modal-close" onclick="AdminApp.closeModal('couponModal')"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="admin-modal-body">
+                <div class="admin-form-grid">
+                    <div class="admin-form-group full">
+                        <label>کد تخفیف *</label>
+                        <input type="text" id="cCode" placeholder="مثلاً SAVE20" style="text-transform: uppercase;">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>نوع تخفیف *</label>
+                        <select id="cType">
+                            <option value="percent">درصدی (٪)</option>
+                            <option value="fixed">مبلغ ثابت (تومان)</option>
+                        </select>
+                    </div>
+                    <div class="admin-form-group">
+                        <label>مقدار تخفیف *</label>
+                        <input type="number" id="cValue" placeholder="مثلاً 20" min="1">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>حداقل مبلغ خرید (تومان)</label>
+                        <input type="number" id="cMinPurchase" placeholder="مثلاً 500000" min="0">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>تاریخ انقضا (شمسی)</label>
+                        <input type="text" id="cExpireDate" placeholder="مثلاً 1404/12/29" readonly style="cursor:pointer; background:#fff;">
+                    </div>
+                </div>
+            </div>
+            <div class="admin-modal-footer">
+                <button class="btn-outline-admin" onclick="AdminApp.closeModal('couponModal')">انصراف</button>
+                <button class="btn-primary-admin" onclick="CouponsPage.save()"><i class="bi bi-check-circle"></i> ذخیره</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/notification-center.js"></script>
+    <script src="admin-common.js"></script>
+    <!-- کتابخانه‌های تاریخ شمسی -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
+    <script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+    
+    <script>
+    const CouponsPage = {
+        coupons: [],
+
+        init() {
+            if (!AdminApp.initPage("coupons", "کدهای تخفیف")) return;
+            this.load();
+            this.render();
+            this.initDatePicker();
+        },
+
+        // راه‌اندازی تقویم شمسی
+        initDatePicker() {
+            if (typeof $.fn.persianDatepicker !== "function") {
+                console.warn("Persian Datepicker لود نشد.");
+                return;
+            }
+            $("#cExpireDate").persianDatepicker({
+                format: "YYYY/MM/DD",
+                initialValue: false,
+                autoClose: true,
+                calendar: {
+                    persian: {
+                        locale: "fa",
+                        leapYearMode: "algorithmic"
+                    }
+                },
+                toolbox: {
+                    calendarSwitch: {
+                        enabled: false
+                    }
+                },
+                navigator: {
+                    scroll: {
+                        enabled: false
+                    }
+                }
+            });
+        },
+
+        load() {
+            try {
+                this.coupons = JSON.parse(localStorage.getItem("bl_coupons") || "[]");
+                if (!Array.isArray(this.coupons)) this.coupons = [];
+            } catch (e) { this.coupons = []; }
+        },
+
+        saveAll() {
+            localStorage.setItem("bl_coupons", JSON.stringify(this.coupons));
+        },
+
+        render() {
+            const el = document.getElementById("couponsList");
+            if (this.coupons.length === 0) {
+                el.innerHTML = `<div class="admin-empty">
+                    <div class="admin-empty-icon"><i class="bi bi-ticket-perforated"></i></div>
+                    <h4>هیچ کد تخفیفی ندارید</h4>
+                    <p>اولین کد تخفیف خود را بسازید تا مشتریان از آن استفاده کنند</p>
+                    <button class="btn-primary-admin" onclick="CouponsPage.openAdd()"><i class="bi bi-plus-circle"></i> افزودن کد تخفیف</button>
+                </div>`;
+                return;
+            }
+
+            el.innerHTML = `<div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>کد</th>
+                            <th>نوع</th>
+                            <th>مقدار</th>
+                            <th>حداقل خرید</th>
+                            <th>تاریخ انقضا</th>
+                            <th>عملیات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${this.coupons.map((c) => `
+                            <tr>
+                                <td><strong style="color:#f97316;font-family:monospace;">${AdminApp.escape(c.code)}</strong></td>
+                                <td>${c.type === "percent" ? "درصدی" : "مبلغ ثابت"}</td>
+                                <td>${c.type === "percent" ? c.value + "٪" : c.value.toLocaleString("fa-IR") + " تومان"}</td>
+                                <td>${(c.minPurchase || 0).toLocaleString("fa-IR")} تومان</td>
+                                <td>${c.expireDate || "—"}</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn-sm delete" onclick="CouponsPage.remove('${c.code}')" title="حذف"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join("")}
+                    </tbody>
+                </table>
+            </div>`;
+        },
+
+        openAdd() {
+            document.getElementById("couponModalTitle").textContent = "کد تخفیف جدید";
+            document.getElementById("cCode").value = "";
+            document.getElementById("cType").value = "percent";
+            document.getElementById("cValue").value = "";
+            document.getElementById("cMinPurchase").value = "";
+            document.getElementById("cExpireDate").value = "";
+            AdminApp.openModal("couponModal");
+        },
+
+        save() {
+            const code = document.getElementById("cCode").value.trim().toUpperCase();
+            const type = document.getElementById("cType").value;
+            const value = parseInt(document.getElementById("cValue").value, 10);
+            const minPurchase = parseInt(document.getElementById("cMinPurchase").value, 10) || 0;
+            const expireDate = document.getElementById("cExpireDate").value;
+
+            if (!code) return AdminApp.toast("کد تخفیف الزامی است", "error");
+            if (!value || value <= 0) return AdminApp.toast("مقدار تخفیف معتبر نیست", "error");
+            if (this.coupons.some((c) => c.code === code)) return AdminApp.toast("این کد قبلاً وجود دارد", "error");
+
+            this.coupons.push({ code, type, value, minPurchase, expireDate, createdAt: new Date().toISOString() });
+            this.saveAll();
+            AdminApp.closeModal("couponModal");
+            this.render();
+            AdminApp.toast("کد تخفیف اضافه شد", "success");
+        },
+
+        remove(code) {
+            AdminApp.customConfirm(`کد تخفیف «${code}» حذف شود؟`, () => {
+                this.coupons = this.coupons.filter((c) => c.code !== code);
+                this.saveAll();
+                this.render();
+                AdminApp.toast("کد تخفیف حذف شد", "success");
+            });
+        }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => CouponsPage.init());
+    </script>
+</body>
+</html>

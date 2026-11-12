@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گزارش‌گیری | بلو مارکت</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin-common.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar" id="adminSidebar"></aside>
+        <div class="admin-overlay" id="adminOverlay"></div>
+        <div class="admin-main">
+            <header class="admin-topbar" id="adminTopbar"></header>
+            <main class="admin-content">
+                <div class="stats-grid" id="reportsStats"></div>
+
+                <div class="admin-card" style="margin-top:22px;">
+                    <div class="admin-card-header">
+                        <h3><i class="bi bi-bar-chart"></i> آمار محصولات</h3>
+                    </div>
+                    <div class="admin-card-body" id="productsStatsReport"></div>
+                </div>
+
+                <section class="admin-card" style="margin-top:22px;">
+                    <div class="admin-card-header">
+                        <h3><i class="bi bi-bug"></i> گزارش‌های خطا</h3>
+                        <button class="btn-outline-admin" onclick="renderBugReports()"><i class="bi bi-arrow-clockwise"></i> تازه‌سازی</button>
+                    </div>
+                    <div class="admin-card-body"><div id="bugReportsList"></div></div>
+                </section>
+
+                <div class="dashboard-grid" style="margin-top:22px;">
+                    <div class="admin-card">
+                        <div class="admin-card-header"><h3><i class="bi bi-trophy"></i> پرفروش‌ترین‌ها</h3></div>
+                        <div class="admin-card-body" id="topProducts"></div>
+                    </div>
+                    <div class="admin-card">
+                        <div class="admin-card-header"><h3><i class="bi bi-pie-chart"></i> وضعیت سفارشات</h3></div>
+                        <div class="admin-card-body" id="ordersStatusChart"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+<script src="../js/notification-center.js"></script>
+    <script src="admin-common.js"></script>
+    <script src="../js/products-data.js"></script>
+    <script src="../js/product-images.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (!AdminApp.initPage("reports", "گزارش‌گیری")) return;
+        renderReports();
+        renderBugReports();
+    });
+
+    function renderReports() {
+        const orders = AdminApp.getOrders();
+        const products = AdminApp.getProducts();
+        const users = AdminApp.getUsers();
+
+        const totalRevenue = orders.reduce((s, o) => s + (o.total || 0), 0);
+        const deliveredOrders = orders.filter(o => o.status === "delivered");
+        const pendingOrders = orders.filter(o => o.status === "pending");
+        const avgOrderValue = orders.length > 0 ? totalRevenue / orders.length : 0;
+
+        document.getElementById("reportsStats").innerHTML = `
+            <div class="stat-card orange"><div class="stat-header"><div class="stat-icon"><i class="bi bi-cash-coin"></i></div></div><div class="stat-value">${AdminApp.formatPrice(totalRevenue)}</div><div class="stat-label">درآمد کل</div></div>
+            <div class="stat-card green"><div class="stat-header"><div class="stat-icon"><i class="bi bi-check-circle"></i></div></div><div class="stat-value">${deliveredOrders.length.toLocaleString("fa-IR")}</div><div class="stat-label">تحویل شده</div></div>
+            <div class="stat-card blue"><div class="stat-header"><div class="stat-icon"><i class="bi bi-calculator"></i></div></div><div class="stat-value">${AdminApp.formatPrice(Math.round(avgOrderValue))}</div><div class="stat-label">میانگین سفارش</div></div>
+            <div class="stat-card red"><div class="stat-header"><div class="stat-icon"><i class="bi bi-hourglass-split"></i></div></div><div class="stat-value">${pendingOrders.length.toLocaleString("fa-IR")}</div><div class="stat-label">در انتظار</div></div>
+        `;
+
+        // آمار محصولات
+        const catCounts = {};
+        products.forEach(p => { catCounts[p.category] = (catCounts[p.category] || 0) + 1; });
+        const demoCount = products.filter(p => p.isDemo).length;
+        const outOfStock = products.filter(p => p.stock === 0).length;
+        const reviewRequired = products.filter(p => p.priceReviewRequired).length;
+
+        document.getElementById("productsStatsReport").innerHTML = `
+            <div class="admin-table-wrap">
+                <table class="admin-table">
+                    <thead><tr><th>دسته</th><th>تعداد</th><th>درصد</th></tr></thead>
+                    <tbody>
+                        ${Object.entries({ mobile:"موبایل", laptop:"لپ‌تاپ", tablet:"تبلت", watch:"ساعت", accessory:"لوازم جانبی" }).map(([k, v]) => `
+                            <tr>
+                                <td>${v}</td>
+                                <td>${(catCounts[k] || 0).toLocaleString("fa-IR")}</td>
+                                <td>${products.length > 0 ? Math.round(((catCounts[k] || 0) / products.length) * 100) : 0}٪</td>
+                            </tr>
+                        `).join("")}
+                        <tr style="background:#f8fafc;font-weight:800;">
+                            <td>جمع کل</td>
+                            <td>${products.length.toLocaleString("fa-IR")}</td>
+                            <td>۱۰۰٪</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid #e2e8f0;">
+                <div style="flex:1;min-width:140px;">
+                    <div style="font-size:0.75rem;color:#64748b;margin-bottom:2px;">محصولات Demo</div>
+                    <div style="font-weight:900;font-size:1.1rem;color:#8b5cf6;">${demoCount.toLocaleString("fa-IR")}</div>
+                </div>
+                <div style="flex:1;min-width:140px;">
+                    <div style="font-size:0.75rem;color:#64748b;margin-bottom:2px;">ناموجود</div>
+                    <div style="font-weight:900;font-size:1.1rem;color:#ef4444;">${outOfStock.toLocaleString("fa-IR")}</div>
+                </div>
+                <div style="flex:1;min-width:140px;">
+                    <div style="font-size:0.75rem;color:#64748b;margin-bottom:2px;">نیازمند تأیید قیمت</div>
+                    <div style="font-weight:900;font-size:1.1rem;color:#f59e0b;">${reviewRequired.toLocaleString("fa-IR")}</div>
+                </div>
+            </div>
+        `;
+
+        // پرفروش‌ترین‌ها
+        const productSales = {};
+        orders.forEach(o => {
+            (o.items || []).forEach(item => {
+                const key = String(item.id);
+                if (!productSales[key]) productSales[key] = { ...item, totalQty: 0, totalPrice: 0 };
+                productSales[key].totalQty += item.quantity || 1;
+                productSales[key].totalPrice += (item.price || 0) * (item.quantity || 1);
+            });
+        });
+        const top = Object.values(productSales).sort((a, b) => b.totalQty - a.totalQty).slice(0, 5);
+        const topEl = document.getElementById("topProducts");
+        if (top.length === 0) {
+            topEl.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon"><i class="bi bi-trophy"></i></div><h4>فروشی نیست</h4></div>`;
+        } else {
+            topEl.innerHTML = top.map((p, i) => `
+                <div class="report-product-row">
+                    <div class="report-rank ${i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''}">${(i + 1).toLocaleString("fa-IR")}</div>
+                    <img src="${AdminApp.escape(p.image || '')}" onerror="this.onerror=null;this.src='../images/products/placeholder-product.svg'">
+                    <div class="report-product-info">
+                        <div class="name">${AdminApp.escape(p.name || "—")}</div>
+                        <div class="meta">${p.totalQty.toLocaleString("fa-IR")} عدد</div>
+                    </div>
+                    <div class="report-product-value">${AdminApp.formatPrice(p.totalPrice)}</div>
+                </div>
+            `).join("");
+        }
+
+        // وضعیت سفارشات
+        const statusLabels = { pending:"در انتظار", processing:"پردازش", shipped:"ارسال شده", delivered:"تحویل شده", cancelled:"لغو شده" };
+        const statusColors = { pending:"#f59e0b", processing:"#3b82f6", shipped:"#8b5cf6", delivered:"#10b981", cancelled:"#ef4444" };
+        const statusCounts = {};
+        orders.forEach(o => { statusCounts[o.status] = (statusCounts[o.status] || 0) + 1; });
+        const chartEl = document.getElementById("ordersStatusChart");
+        if (orders.length === 0) {
+            chartEl.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon"><i class="bi bi-pie-chart"></i></div><h4>داده‌ای نیست</h4></div>`;
+        } else {
+            const maxCount = Math.max(...Object.values(statusCounts));
+            chartEl.innerHTML = Object.entries(statusLabels).map(([key, label]) => {
+                const count = statusCounts[key] || 0;
+                const percent = orders.length > 0 ? (count / orders.length) * 100 : 0;
+                const barWidth = maxCount > 0 ? (count / maxCount) * 100 : 0;
+                return `
+                    <div class="report-status-row">
+                        <div class="report-status-header"><span>${label}</span><strong>${count.toLocaleString("fa-IR")} (${Math.round(percent)}٪)</strong></div>
+                        <div class="report-bar-bg"><div class="report-bar-fill" style="width:${barWidth}%;background:${statusColors[key]};"></div></div>
+                    </div>
+                `;
+            }).join("");
+        }
+    }
+
+    window.renderBugReports = function() {
+        const host = document.getElementById('bugReportsList');
+        if (!host) return;
+        let rows = [];
+        try {
+            rows = JSON.parse(localStorage.getItem('bl_bug_reports') || '[]');
+            if (!Array.isArray(rows)) rows = [];
+        } catch (e) {}
+        if (!rows.length) {
+            host.innerHTML = '<div class="admin-empty"><div class="admin-empty-icon"><i class="bi bi-inbox"></i></div><h4>گزارشی نیست</h4><p>گزارش‌ها از صفحه report.html ثبت می‌شوند</p></div>';
+            return;
+        }
+        host.innerHTML = rows.map(r => `
+            <article style="padding:14px;border:1px solid #e5e7eb;border-radius:12px;margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+                    <strong>${AdminApp.escape(r.title || "—")}</strong>
+                    <span class="status-badge info">${AdminApp.escape(r.status || 'new')}</span>
+                </div>
+                <p style="margin:8px 0;color:#64748b;font-size:0.85rem;line-height:1.8;">${AdminApp.escape(r.message || "")}</p>
+                <div style="display:flex;flex-wrap:wrap;gap:10px;font-size:0.75rem;color:#94a3b8;">
+                    <span><i class="bi bi-person"></i> ${AdminApp.escape(r.name || "—")}</span>
+                    <span><i class="bi bi-calendar"></i> ${AdminApp.formatDateTime(r.createdAt)}</span>
+                    <span><i class="bi bi-tag"></i> ${AdminApp.escape(r.type || "—")}</span>
+                </div>
+            </article>
+        `).join('');
+    };
+    </script>
+</body>
+</html>

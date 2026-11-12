@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تیکت‌ها | بلو مارکت</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin-common.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar" id="adminSidebar"></aside>
+        <div class="admin-overlay" id="adminOverlay"></div>
+        <div class="admin-main">
+            <header class="admin-topbar" id="adminTopbar"></header>
+            <main class="admin-content">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3><i class="bi bi-chat-dots"></i> مدیریت تیکت‌ها</h3>
+                        <div class="filter-buttons-row">
+                            <button class="filter-btn-admin active" onclick="TicketsPage.filter('all', this)">همه</button>
+                            <button class="filter-btn-admin" onclick="TicketsPage.filter('unread', this)">خوانده‌نشده</button>
+                            <button class="filter-btn-admin" onclick="TicketsPage.filter('open', this)">باز</button>
+                            <button class="filter-btn-admin" onclick="TicketsPage.filter('answered', this)">پاسخ داده</button>
+                            <button class="filter-btn-admin" onclick="TicketsPage.filter('closed', this)">بسته</button>
+                        </div>
+                    </div>
+                    <div class="admin-card-body"><div id="ticketsList"></div></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="admin-modal-backdrop" id="ticketModal">
+        <div class="admin-modal" style="max-width:720px;">
+            <div class="admin-modal-header">
+                <h4><i class="bi bi-chat-dots"></i> <span id="modalTicketSubject"></span></h4>
+                <button class="admin-modal-close" onclick="AdminApp.closeModal('ticketModal')"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="admin-modal-body" id="ticketModalBody"></div>
+        </div>
+    </div>
+
+<script src="../js/notification-center.js"></script>
+    <script src="admin-common.js"></script>
+    <script>
+    const TicketsPage = {
+        currentFilter: "all",
+        tickets: [],
+
+        init() {
+            if (!AdminApp.initPage("tickets", "تیکت‌ها")) return;
+            this.load();
+            this.render();
+        },
+
+        load() { this.tickets = AdminApp.getTickets(); },
+        save() { AdminApp.saveTickets(this.tickets); AdminApp.updateNotifBadge(); },
+
+        filter(f, btn) {
+            this.currentFilter = f;
+            document.querySelectorAll(".filter-btn-admin").forEach(b => b.classList.remove("active"));
+            if (btn) btn.classList.add("active");
+            this.render();
+        },
+
+        getFiltered() {
+            if (this.currentFilter === "all") return [...this.tickets];
+            if (this.currentFilter === "unread") return this.tickets.filter(t => !t.adminRead);
+            return this.tickets.filter(t => t.status === this.currentFilter);
+        },
+
+        render() {
+            const list = this.getFiltered();
+            const el = document.getElementById("ticketsList");
+            if (list.length === 0) {
+                el.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon"><i class="bi bi-chat-square-text"></i></div><h4>تیکتی یافت نشد</h4></div>`;
+                return;
+            }
+            el.innerHTML = `<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>شناسه</th><th>کاربر</th><th>موضوع</th><th>وضعیت</th><th>تاریخ</th><th>عملیات</th></tr></thead><tbody>${list.map(t => this.row(t)).join("")}</tbody></table></div>`;
+        },
+
+        row(t) {
+            const sm = { open:{label:"باز",class:"warning"}, answered:{label:"پاسخ",class:"info"}, closed:{label:"بسته",class:"neutral"} };
+            const st = sm[t.status] || sm.open;
+            return `<tr class="${t.adminRead ? '' : 'row-unread'}" style="cursor:pointer;" onclick="TicketsPage.openTicket('${t.id}')">
+                <td>${!t.adminRead ? '<span style="display:inline-block;width:8px;height:8px;background:#ef4444;border-radius:50%;margin-left:6px;"></span>' : ""}<strong>${AdminApp.escape(t.id)}</strong></td>
+                <td>${AdminApp.escape(t.userName || "کاربر")}</td>
+                <td>${AdminApp.escape(t.subject)}</td>
+                <td><span class="status-badge ${st.class}">${st.label}</span></td>
+                <td>${AdminApp.formatDate(t.createdAt)}</td>
+                <td><div class="action-buttons"><button class="action-btn-sm view"><i class="bi bi-eye"></i></button></div></td>
+            </tr>`;
+        },
+
+        openTicket(id) {
+            const ticket = this.tickets.find(t => String(t.id) === String(id));
+            if (!ticket) return;
+
+            ticket.adminRead = true;
+            this.save();
+
+            document.getElementById("modalTicketSubject").textContent = ticket.subject;
+            document.getElementById("ticketModalBody").innerHTML = `
+                <div class="order-detail-info" style="margin-bottom:16px;">
+                    <div class="order-info-row"><span class="label">کاربر:</span><span>${AdminApp.escape(ticket.userName || "کاربر")}</span></div>
+                    <div class="order-info-row"><span class="label">ایمیل:</span><span>${AdminApp.escape(ticket.userEmail || "—")}</span></div>
+                    <div class="order-info-row"><span class="label">موضوع:</span><span>${AdminApp.escape(ticket.subject)}</span></div>
+                </div>
+
+                <div class="ticket-messages">
+                    ${(ticket.messages || []).map(m => `
+                        <div class="ticket-message ${m.from}">
+                            <div class="ticket-message-header">
+                                <strong>${m.from === "user" ? AdminApp.escape(m.authorName || "کاربر") : "شما (پشتیبانی)"}</strong>
+                                <small>${AdminApp.formatDateTime(m.createdAt)}</small>
+                            </div>
+                            <div class="ticket-message-text">${AdminApp.escape(m.text)}</div>
+                        </div>
+                    `).join("")}
+                </div>
+
+                ${ticket.status !== "closed" ? `
+                    <div class="ticket-reply-box">
+                        <textarea id="adminReplyText" class="ticket-reply-textarea" placeholder="پاسخ خود را بنویسید..."></textarea>
+                        <div class="ticket-reply-actions">
+                            <button class="btn-outline-admin" onclick="TicketsPage.closeTicket('${ticket.id}')"><i class="bi bi-x-circle"></i> بستن تیکت</button>
+                            <button class="btn-primary-admin" onclick="TicketsPage.reply('${ticket.id}')"><i class="bi bi-send"></i> ارسال پاسخ</button>
+                        </div>
+                    </div>
+                ` : `<div style="text-align:center;padding:16px;background:#f1f5f9;color:#64748b;border-radius:12px;"><i class="bi bi-lock-fill"></i> تیکت بسته شده</div>`}
+            `;
+
+            AdminApp.openModal("ticketModal");
+            this.render();
+        },
+
+        reply(id) {
+            const text = document.getElementById("adminReplyText")?.value.trim();
+            if (!text) return AdminApp.toast("متن پاسخ الزامی", "error");
+
+            const ticket = this.tickets.find(t => String(t.id) === String(id));
+            if (!ticket) return;
+
+            ticket.messages = ticket.messages || [];
+            ticket.messages.push({
+                id: "msg_" + Date.now(),
+                from: "admin",
+                authorName: "پشتیبانی",
+                text,
+                createdAt: new Date().toISOString(),
+            });
+            ticket.status = "answered";
+            ticket.userRead = false;
+            ticket.updatedAt = new Date().toISOString();
+            this.save();
+
+            if (window.NotificationCenter?.events?.ticketAdminReply) {
+                NotificationCenter.events.ticketAdminReply(ticket);
+            }
+
+            AdminApp.toast("پاسخ ارسال شد", "success");
+            AdminApp.closeModal("ticketModal");
+            this.render();
+        },
+
+        closeTicket(id) {
+            const ticket = this.tickets.find(t => String(t.id) === String(id));
+            if (!ticket) return;
+
+            AdminApp.customConfirm("تیکت بسته شود؟", () => {
+                ticket.status = "closed";
+                ticket.userRead = false;
+                ticket.updatedAt = new Date().toISOString();
+                this.save();
+
+                if (window.NotificationCenter?.events?.ticketClosed) {
+                    NotificationCenter.events.ticketClosed(ticket);
+                }
+
+                AdminApp.toast("تیکت بسته شد", "success");
+                AdminApp.closeModal("ticketModal");
+                this.render();
+            });
+        },
+    };
+
+    document.addEventListener("DOMContentLoaded", () => TicketsPage.init());
+    </script>
+<script src="../js/demo-events.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سفارشات | بلو مارکت</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin-common.css">
+    <link rel="stylesheet" href="admin-header.css">
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar" id="adminSidebar"></aside>
+        <div class="admin-overlay" id="adminOverlay"></div>
+        <div class="admin-main">
+            <header class="admin-topbar" id="adminTopbar"></header>
+            <main class="admin-content">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3><i class="bi bi-bag-check"></i> مدیریت سفارشات</h3>
+                        <div class="filter-buttons-row" id="filterRow">
+                            <button class="filter-btn-admin active" onclick="OrdersPage.filter('all', this)">همه</button>
+                            <button class="filter-btn-admin" onclick="OrdersPage.filter('pending', this)">در انتظار</button>
+                            <button class="filter-btn-admin" onclick="OrdersPage.filter('processing', this)">پردازش</button>
+                            <button class="filter-btn-admin" onclick="OrdersPage.filter('shipped', this)">ارسال شده</button>
+                            <button class="filter-btn-admin" onclick="OrdersPage.filter('delivered', this)">تحویل شده</button>
+                            <button class="filter-btn-admin" onclick="OrdersPage.filter('cancelled', this)">لغو شده</button>
+                        </div>
+                    </div>
+                    <div class="admin-card-body">
+                        <div id="ordersList"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="admin-modal-backdrop" id="orderModal">
+        <div class="admin-modal" style="max-width:780px;">
+            <div class="admin-modal-header">
+                <h4><i class="bi bi-bag-check"></i> جزئیات سفارش <span id="modalOrderId" style="color:#f97316;"></span></h4>
+                <button class="admin-modal-close" onclick="AdminApp.closeModal('orderModal')"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="admin-modal-body" id="orderModalBody"></div>
+        </div>
+    </div>
+
+<script src="../js/notification-center.js"></script>
+    <script src="admin-common.js"></script>
+    <script>
+    const OrdersPage = {
+        currentFilter: "all",
+        orders: [],
+
+        init() {
+            if (!AdminApp.initPage("orders", "سفارشات")) return;
+            this.load();
+            this.render();
+        },
+
+        load() { this.orders = AdminApp.getOrders(); },
+        save() { AdminApp.saveOrders(this.orders); },
+
+        filter(f, btn) {
+            this.currentFilter = f;
+            document.querySelectorAll(".filter-btn-admin").forEach(b => b.classList.remove("active"));
+            if (btn) btn.classList.add("active");
+            this.render();
+        },
+
+        getFiltered() {
+            if (this.currentFilter === "all") return [...this.orders];
+            return this.orders.filter(o => o.status === this.currentFilter);
+        },
+
+        render() {
+            const list = this.getFiltered();
+            const el = document.getElementById("ordersList");
+            if (list.length === 0) {
+                el.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon"><i class="bi bi-bag-x"></i></div><h4>سفارشی یافت نشد</h4></div>`;
+                return;
+            }
+            el.innerHTML = `<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>شناسه</th><th>مشتری</th><th>اقلام</th><th>مبلغ</th><th>وضعیت</th><th>تاریخ</th><th>عملیات</th></tr></thead><tbody>${list.map(o => this.row(o)).join("")}</tbody></table></div>`;
+        },
+
+        row(o) {
+            const sm = { pending:{label:"در انتظار",class:"warning"}, processing:{label:"پردازش",class:"info"}, shipped:{label:"ارسال شده",class:"info"}, delivered:{label:"تحویل شده",class:"success"}, cancelled:{label:"لغو شده",class:"danger"} };
+            const st = sm[o.status] || sm.pending;
+            return `<tr class="${o.adminRead ? '' : 'row-unread'}">
+                <td>${!o.adminRead ? '<span style="display:inline-block;width:8px;height:8px;background:#ef4444;border-radius:50%;margin-left:6px;"></span>' : ""}<strong>${AdminApp.escape(o.id || "—")}</strong></td>
+                <td>${AdminApp.escape(o.userEmail || "—")}</td>
+                <td>${(o.items || []).length.toLocaleString("fa-IR")}</td>
+                <td>${AdminApp.formatPrice(o.total)}</td>
+                <td><span class="status-badge ${st.class}">${st.label}</span></td>
+                <td>${AdminApp.formatDate(o.createdAt)}</td>
+                <td><div class="action-buttons"><button class="action-btn-sm view" onclick="OrdersPage.openDetail('${o.id}')"><i class="bi bi-eye"></i></button></div></td>
+            </tr>`;
+        },
+
+        openDetail(id) {
+            const order = this.orders.find(o => String(o.id) === String(id));
+            if (!order) return;
+
+            order.adminRead = true;
+            this.save();
+            AdminApp.updateNotifBadge();
+
+            document.getElementById("modalOrderId").textContent = order.id;
+            const sm = { pending:"در انتظار", processing:"پردازش", shipped:"ارسال شده", delivered:"تحویل شده", cancelled:"لغو شده" };
+
+            document.getElementById("orderModalBody").innerHTML = `
+                <div class="order-detail-info">
+                    <div class="order-info-row">
+                        <span class="label">وضعیت:</span>
+                        <select class="admin-select-sm" onchange="OrdersPage.updateStatus('${order.id}', this.value)">
+                            ${Object.entries(sm).map(([k, v]) => `<option value="${k}" ${order.status === k ? "selected" : ""}>${v}</option>`).join("")}
+                        </select>
+                    </div>
+                    <div class="order-info-row"><span class="label">مشتری:</span><span>${AdminApp.escape(order.userEmail || "—")}</span></div>
+                    <div class="order-info-row"><span class="label">تاریخ:</span><span>${AdminApp.formatDateTime(order.createdAt)}</span></div>
+                    <div class="order-info-row"><span class="label">روش پرداخت:</span><span>${order.payment === "wallet" ? "کیف پول" : "آنلاین"}</span></div>
+                    <div class="order-info-row"><span class="label">کد پیگیری:</span><span>${AdminApp.escape(order.trackingCode || "—")}</span></div>
+                </div>
+
+                ${order.address ? `
+                <h4 class="admin-subsection-title"><i class="bi bi-geo-alt"></i> آدرس ارسال</h4>
+                <div style="background:#f8fafc;padding:14px;border-radius:12px;margin-bottom:16px;">
+                    <div style="font-weight:700;margin-bottom:4px;">${AdminApp.escape(order.address.title || "")}</div>
+                    <div style="color:#475569;font-size:0.88rem;line-height:1.8;">
+                        ${AdminApp.escape(order.address.province || "")}، ${AdminApp.escape(order.address.city || "")}، ${AdminApp.escape(order.address.fullAddress || "")}
+                    </div>
+                    ${order.address.phone ? `<div style="color:#64748b;font-size:0.82rem;margin-top:4px;"><i class="bi bi-phone"></i> ${AdminApp.escape(order.address.phone)}</div>` : ""}
+                </div>
+                ` : ""}
+
+                <h4 class="admin-subsection-title"><i class="bi bi-box-seam"></i> اقلام سفارش</h4>
+                <div class="order-items-list">
+                    ${(order.items || []).map(item => `
+                        <div class="order-detail-item">
+                            <img src="${AdminApp.escape(item.image || "")}" onerror="this.onerror=null;this.src='../images/products/placeholder-product.svg'">
+                            <div class="order-detail-item-info">
+                                <div class="order-detail-item-name">${AdminApp.escape(item.name)}</div>
+                                <div class="order-detail-item-meta">تعداد: ${item.quantity} ${item.color ? '| رنگ: ' + AdminApp.escape(item.color) : ""}</div>
+                            </div>
+                            <div class="order-detail-item-price">${AdminApp.formatPrice((item.price || 0) * (item.quantity || 1))}</div>
+                        </div>
+                    `).join("")}
+                </div>
+
+                <div class="order-totals-box">
+                    <div class="order-total-row"><span>جمع کالاها:</span><strong>${AdminApp.formatPrice(order.subtotal)}</strong></div>
+                    ${order.couponDiscount > 0 ? `<div class="order-total-row discount"><span>تخفیف:</span><strong>− ${AdminApp.formatPrice(order.couponDiscount)}</strong></div>` : ""}
+                    <div class="order-total-row"><span>ارسال:</span><strong>${order.shippingCost === 0 ? "رایگان" : AdminApp.formatPrice(order.shippingCost)}</strong></div>
+                    <div class="order-total-row total"><span>مبلغ کل:</span><strong>${AdminApp.formatPrice(order.total)}</strong></div>
+                </div>
+            `;
+
+            AdminApp.openModal("orderModal");
+            this.render();
+        },
+
+        updateStatus(id, status) {
+            const order = this.orders.find(o => String(o.id) === String(id));
+            if (!order || order.status === status) return;
+            order.status = status;
+            order.updatedAt = new Date().toISOString();
+            this.save();
+            if (window.NotificationCenter?.events?.orderStatusChanged) {
+                NotificationCenter.events.orderStatusChanged(order, status);
+            }
+            AdminApp.toast("وضعیت به‌روزرسانی شد", "success");
+            this.render();
+        },
+    };
+
+    document.addEventListener("DOMContentLoaded", () => OrdersPage.init());
+    </script>
+<script src="../js/demo-events.js"></script>
+</body>
+</html>

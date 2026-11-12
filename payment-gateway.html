@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درگاه پرداخت | بلو مارکت</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .gateway-card {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 440px;
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gateway-header {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: #fff;
+            padding: 24px;
+            text-align: center;
+        }
+        .gateway-header h2 { margin: 0 0 8px; font-size: 1.3rem; font-weight: 900; }
+        .gateway-header p { margin: 0; font-size: 0.85rem; opacity: 0.9; }
+        .gateway-body { padding: 28px; }
+        .amount-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .amount-box span { display: block; color: #64748b; font-size: 0.85rem; margin-bottom: 6px; }
+        .amount-box strong { font-size: 1.8rem; color: #f97316; font-weight: 900; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 700; color: #334155; }
+        .form-group input {
+            width: 100%; padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 12px;
+            font-family: inherit; font-size: 1rem; color: #1e293b; background: #f8fafc;
+            outline: none; transition: all 0.3s; text-align: center; direction: ltr; letter-spacing: 2px;
+        }
+        .form-group input:focus { border-color: #f97316; background: #fff; box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .pay-btn {
+            width: 100%; padding: 16px; background: #1e293b; color: #fff; border: none;
+            border-radius: 14px; font-family: inherit; font-size: 1rem; font-weight: 800;
+            cursor: pointer; transition: all 0.3s; margin-top: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .pay-btn:hover { background: #0f172a; transform: translateY(-2px); }
+        .pay-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .cancel-link {
+            display: block; text-align: center; margin-top: 20px; color: #ef4444;
+            text-decoration: none; font-size: 0.85rem; font-weight: 700;
+        }
+        .gateway-footer {
+            background: #f8fafc; padding: 14px; text-align: center;
+            font-size: 0.75rem; color: #94a3b8; border-top: 1px solid #e2e8f0;
+        }
+        .gateway-footer i { color: #10b981; margin-left: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="gateway-card">
+        <div class="gateway-header">
+            <h2><i class="bi bi-credit-card-2-front-fill"></i> درگاه پرداخت اینترنتی</h2>
+            <p>سامانه پرداخت امن بلو مارکت</p>
+        </div>
+        <div class="gateway-body">
+            <div class="amount-box">
+                <span>مبلغ قابل پرداخت</span>
+                <strong id="amountDisplay">۰ تومان</strong>
+            </div>
+
+            <form id="gatewayForm">
+                <div class="form-group">
+                    <label>شماره کارت</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>تاریخ انقضا</label>
+                        <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label>CVV2</label>
+                        <input type="text" id="cvv2" placeholder="***" maxlength="4" required>
+                    </div>
+                </div>
+                <button type="submit" class="pay-btn" id="payBtn">
+                    <i class="bi bi-shield-lock"></i> پرداخت و تایید
+                </button>
+            </form>
+
+            <a href="checkout.html" class="cancel-link"><i class="bi bi-arrow-right"></i> انصراف و بازگشت</a>
+        </div>
+        <div class="gateway-footer">
+            <i class="bi bi-shield-check"></i> این یک درگاه شبیه‌سازی شده برای تست است
+        </div>
+    </div>
+
+    <script>
+        // دریافت مبلغ از URL (که از صفحه تسویه حساب فرستاده می‌شه)
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = Number(urlParams.get("amount") || 0);
+        
+        // نمایش مبلغ
+        document.getElementById("amountDisplay").textContent = amount.toLocaleString("fa-IR") + " تومان";
+
+        // فرمت خودکار شماره کارت (هر ۴ رقم یه فاصله)
+        const cardInput = document.getElementById("cardNumber");
+        cardInput.addEventListener("input", (e) => {
+            let value = e.target.value.replace(/\D/g, "");
+            value = value.replace(/(.{4})/g, "$1 ").trim();
+            e.target.value = value.slice(0, 19);
+        });
+
+        // فرمت خودکار تاریخ انقضا
+        const expiryInput = document.getElementById("expiryDate");
+        expiryInput.addEventListener("input", (e) => {
+            let value = e.target.value.replace(/\D/g, "");
+            if (value.length > 2) value = value.slice(0, 2) + "/" + value.slice(2);
+            e.target.value = value;
+        });
+
+        // فقط عدد برای CVV
+        const cvvInput = document.getElementById("cvv2");
+        cvvInput.addEventListener("input", (e) => {
+            e.target.value = e.target.value.replace(/\D/g, "");
+        });
+
+        // ارسال فرم
+        document.getElementById("gatewayForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            const card = cardInput.value.replace(/\s/g, "");
+            const expiry = expiryInput.value;
+            const cvv = cvvInput.value;
+
+            if (card.length !== 16) {
+                alert("شماره کارت باید ۱۶ رقم باشد");
+                return;
+            }
+            if (expiry.length !== 5) {
+                alert("تاریخ انقضا را به درستی وارد کنید (مثال: 12/25)");
+                return;
+            }
+            if (cvv.length < 3) {
+                alert("CVV2 باید حداقل ۳ رقم باشد");
+                return;
+            }
+
+            const btn = document.getElementById("payBtn");
+            btn.disabled = true;
+            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> در حال پرداخت...';
+
+            // شبیه‌سازی تاخیر پرداخت
+            setTimeout(() => {
+                // تولید کد پیگیری
+                const trackingCode = "PAY-" + Date.now().toString().slice(-10);
+                
+                // ذخیره کد پیگیری در حافظه
+                localStorage.setItem("bl_last_payment_tracking", trackingCode);
+                
+                // انتقال به صفحه تشکر با کد پیگیری و مبلغ
+                window.location.href = `thankyou.html?tracking=${trackingCode}&amount=${amount}`;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

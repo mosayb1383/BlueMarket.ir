@@ -1,0 +1,599 @@
+/* ========================================
+   صفحه درباره ما — موبایلی بلوچستان
+   ======================================== */
+
+.about-main {
+    background: linear-gradient(135deg, #fff9f5 0%, #fff5ec 100%);
+    min-height: 100vh;
+    padding: 32px 0 60px;
+}
+
+.about-breadcrumb {
+    background: transparent;
+    padding: 0 0 20px;
+}
+
+.about-breadcrumb .breadcrumb {
+    margin: 0;
+    font-size: 0.88rem;
+    background: white;
+    padding: 12px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(249, 115, 22, 0.08);
+    box-shadow: 0 2px 12px rgba(31, 38, 135, 0.04);
+}
+
+.about-breadcrumb a {
+    color: #f97316;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* ========== Hero ========== */
+.about-hero {
+    background: linear-gradient(135deg, #f97316, #ea580c, #fb923c);
+    border-radius: 26px;
+    padding: 60px 40px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 60px rgba(249, 115, 22, 0.25);
+    text-align: center;
+}
+
+.about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.12), transparent 45%);
+    pointer-events: none;
+}
+
+.about-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3Cpattern id='a' width='30' height='30' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='15' cy='15' r='1.2' fill='white' opacity='0.12'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='200' height='200' fill='url(%23a)'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.about-hero-icon {
+    width: 96px;
+    height: 96px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 2.6rem;
+    animation: float-soft 3s ease-in-out infinite;
+}
+
+@keyframes float-soft {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.about-hero h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0 0 14px;
+    line-height: 1.3;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+.about-hero p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin: 0;
+    opacity: 0.95;
+}
+
+/* ========== بخش‌ها ========== */
+.about-section {
+    margin-bottom: 40px;
+}
+
+.section-title-about {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.section-title-about h2 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin: 0 0 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-title-about h2 i {
+    color: #f97316;
+}
+
+.section-title-about .subtitle {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ========== کارت داستان ========== */
+.about-story-card {
+    background: white;
+    border-radius: 22px;
+    padding: 40px;
+    border: 1px solid rgba(249, 115, 22, 0.08);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.06);
+    position: relative;
+    overflow: hidden;
+    animation: cardIn 0.6s ease-out;
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.about-story-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(180deg, #f97316, #ffedd5);
+}
+
+.about-story-card p {
+    color: #4b5563;
+    line-height: 2;
+    font-size: 0.98rem;
+    margin-bottom: 16px;
+    text-align: justify;
+}
+
+.about-story-card p:first-letter {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: #f97316;
+}
+
+.about-story-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* ========== آمار ========== */
+.about-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+}
+
+.about-stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 20px;
+    text-align: center;
+    border: 1px solid rgba(249, 115, 22, 0.1);
+    box-shadow: 0 4px 20px rgba(31, 38, 135, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f97316, #ea580c, #fb923c);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-stat-card:hover::before {
+    transform: scaleX(1);
+}
+
+.about-stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(249, 115, 22, 0.15);
+    border-color: rgba(249, 115, 22, 0.25);
+}
+
+.about-stat-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #fff7ed, #fed7aa);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 1.6rem;
+    color: #f97316;
+    transition: all 0.3s;
+}
+
+.about-stat-card:hover .about-stat-icon {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.about-stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #f97316;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+}
+
+.about-stat-label {
+    font-size: 0.88rem;
+    color: #4b5563;
+    font-weight: 600;
+}
+
+/* ========== ارزش‌ها ========== */
+.about-values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.about-value-card {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    border: 1px solid #f3f4f6;
+    box-shadow: 0 4px 20px rgba(31, 38, 135, 0.05);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(249, 115, 22, 0.15);
+    border-color: rgba(249, 115, 22, 0.2);
+}
+
+.about-value-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    font-size: 1.8rem;
+    color: white;
+    box-shadow: 0 10px 24px rgba(249, 115, 22, 0.3);
+    transition: all 0.3s;
+}
+
+.about-value-card:hover .about-value-icon {
+    transform: scale(1.1) rotate(8deg);
+    box-shadow: 0 14px 32px rgba(249, 115, 22, 0.4);
+}
+
+.about-value-card h4 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin: 0 0 10px;
+}
+
+.about-value-card p {
+    font-size: 0.88rem;
+    color: #6b7280;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* ========== تایم‌لاین ========== */
+.about-timeline {
+    position: relative;
+    padding-right: 40px;
+    margin-top: 20px;
+}
+
+.about-timeline::before {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #f97316, #ffedd5);
+    border-radius: 3px;
+}
+
+.timeline-item {
+    position: relative;
+    padding: 0 30px 32px 0;
+    animation: timelineIn 0.5s ease-out backwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.05s; }
+.timeline-item:nth-child(2) { animation-delay: 0.1s; }
+.timeline-item:nth-child(3) { animation-delay: 0.15s; }
+.timeline-item:nth-child(4) { animation-delay: 0.2s; }
+
+@keyframes timelineIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    background: white;
+    border: 3px solid #f97316;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f97316;
+    font-size: 0.9rem;
+    font-weight: 800;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+    z-index: 1;
+}
+
+.timeline-content {
+    background: white;
+    border: 1px solid rgba(249, 115, 22, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(31, 38, 135, 0.04);
+    transition: all 0.3s;
+}
+
+.timeline-content:hover {
+    transform: translateX(-4px);
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.12);
+    border-color: rgba(249, 115, 22, 0.25);
+}
+
+.timeline-year {
+    display: inline-block;
+    background: linear-gradient(135deg, #fff7ed, #ffedd5);
+    color: #f97316;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.timeline-content h4 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #1f2937;
+}
+
+.timeline-content p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.88rem;
+    line-height: 1.8;
+}
+
+/* ========== CTA ========== */
+.about-cta {
+    background: linear-gradient(135deg, #1f2937, #111827);
+    border-radius: 22px;
+    padding: 44px 32px;
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(249, 115, 22, 0.2), transparent 60%);
+    pointer-events: none;
+}
+
+.about-cta-content {
+    position: relative;
+    z-index: 1;
+}
+
+.about-cta h2 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0 0 12px;
+}
+
+.about-cta p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    margin: 0 0 24px;
+    line-height: 1.8;
+}
+
+.about-cta-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-about-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    padding: 13px 26px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.92rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4);
+}
+
+.btn-about-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(249, 115, 22, 0.5);
+    color: white;
+}
+
+.btn-about-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: white;
+    padding: 13px 26px;
+    border-radius: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.92rem;
+    transition: all 0.3s;
+}
+
+.btn-about-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* ========== ریسپانسیو ========== */
+@media (max-width: 768px) {
+    .about-main {
+        padding: 20px 0 40px;
+    }
+
+    .about-hero {
+        padding: 40px 24px;
+        border-radius: 20px;
+        margin-bottom: 28px;
+    }
+
+    .about-hero-icon {
+        width: 74px;
+        height: 74px;
+        font-size: 2rem;
+    }
+
+    .about-hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .about-hero p {
+        font-size: 0.9rem;
+    }
+
+    .about-story-card {
+        padding: 24px;
+        border-radius: 18px;
+    }
+
+    .section-title-about h2 {
+        font-size: 1.35rem;
+    }
+
+    .about-stat-number {
+        font-size: 1.7rem;
+    }
+
+    .about-value-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .about-timeline {
+        padding-right: 30px;
+    }
+
+    .about-timeline::before {
+        right: 12px;
+    }
+
+    .timeline-dot {
+        right: -24px;
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .about-cta {
+        padding: 32px 20px;
+        border-radius: 18px;
+    }
+
+    .about-cta h2 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .about-stat-card {
+        padding: 20px 12px;
+    }
+
+    .about-stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .about-stat-number {
+        font-size: 1.5rem;
+    }
+
+    .about-stat-label {
+        font-size: 0.78rem;
+    }
+}

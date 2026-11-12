@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اعلان‌ها | بلو مارکت</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="../images/logo.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="admin-common.css">
+    <style>
+        .anf-item { display: flex; gap: 14px; padding: 14px 6px; border-bottom: 1px solid #f1f5f9; align-items: flex-start; }
+        .anf-item:last-child { border-bottom: 0; }
+        .anf-item.unread { background: #fffaf5; }
+        .anf-main { flex: 1; min-width: 0; cursor: pointer; }
+        .anf-title { font-weight: 800; color: #1e293b; }
+        .anf-msg { color: #475569; font-size: .92rem; margin-top: 2px; }
+        .anf-time { color: #94a3b8; font-size: .78rem; margin-top: 4px; }
+        .anf-actions { display: flex; gap: 6px; }
+    </style>
+</head>
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="admin-sidebar" id="adminSidebar"></aside>
+        <div class="admin-overlay" id="adminOverlay"></div>
+        <div class="admin-main">
+            <header class="admin-topbar" id="adminTopbar"></header>
+            <main class="admin-content">
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3><i class="bi bi-bell"></i> همه اعلان‌ها</h3>
+                        <div class="filter-buttons-row">
+                            <button class="filter-btn-admin active" onclick="NotifPage.filter('all', this)">همه</button>
+                            <button class="filter-btn-admin" onclick="NotifPage.filter('unread', this)">خوانده‌نشده</button>
+                            <button class="filter-btn-admin" onclick="NotifPage.filter('read', this)">خوانده‌شده</button>
+                            <button class="btn-outline-admin" onclick="NotifPage.markAll()"><i class="bi bi-check2-all"></i> همه را خواندم</button>
+                        </div>
+                    </div>
+                    <div class="admin-card-body"><div id="notifPageList"></div></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/notification-center.js"></script>
+    <script src="admin-common.js"></script>
+    <script>
+    const NotifPage = {
+        current: "all",
+        init() {
+            if (!AdminApp.initPage("notifications", "اعلان‌ها")) return;
+            this.render();
+            window.addEventListener("bl:notifications-changed", () => this.render());
+            window.addEventListener("storage", (e) => { if (e.key === "notifications") this.render(); });
+        },
+        filter(f, btn) {
+            this.current = f;
+            document.querySelectorAll(".filter-btn-admin").forEach(b => b.classList.remove("active"));
+            if (btn) btn.classList.add("active");
+            this.render();
+        },
+        markAll() {
+            NotificationCenter.markAllRead("admin");
+            AdminApp.updateNotifBadge();
+            AdminApp.toast("همه اعلان‌ها خوانده شدند", "success");
+            this.render();
+        },
+        open(id) {
+            const n = NotificationCenter.forAdmin().find(x => x.id === id);
+            if (!n) return;
+            NotificationCenter.markRead(id);
+            const link = NotificationCenter.linkFor(n);
+            if (link === "notifications.html") { AdminApp.updateNotifBadge(); this.render(); return; }
+            window.location.href = link;
+        },
+        read(id) {
+            NotificationCenter.markRead(id);
+            AdminApp.updateNotifBadge();
+            this.render();
+        },
+        remove(id) {
+            NotificationCenter.remove(id);
+            AdminApp.updateNotifBadge();
+            this.render();
+        },
+        render() {
+            const el = document.getElementById("notifPageList");
+            const items = NotificationCenter.forAdmin().filter(n =>
+                this.current === "unread" ? !n.isRead : this.current === "read" ? n.isRead : true);
+            AdminApp.updateNotifBadge();
+            if (!items.length) {
+                el.innerHTML = `<div class="admin-empty"><div class="admin-empty-icon"><i class="bi bi-bell-slash"></i></div><h4>اعلانی وجود ندارد</h4></div>`;
+                return;
+            }
+            el.innerHTML = items.map(n => {
+                const m = NotificationCenter.typeMeta(n.type);
+                return `
+                    <div class="anf-item ${n.isRead ? "" : "unread"}">
+                        <div class="admin-notif-item-icon ${m.color}"><i class="bi ${m.icon}"></i></div>
+                        <div class="anf-main" onclick="NotifPage.open('${AdminApp.escape(n.id)}')">
+                            <div class="anf-title">${AdminApp.escape(n.title)} ${n.priority === "high" ? '<span class="status-badge danger">مهم</span>' : ""}</div>
+                            <div class="anf-msg">${AdminApp.escape(n.message)}</div>
+                            <div class="anf-time">${AdminApp.formatDateTime(n.createdAt)}</div>
+                        </div>
+                        <div class="anf-actions">
+                            ${n.isRead ? "" : `<button class="action-btn-sm view" onclick="NotifPage.read('${AdminApp.escape(n.id)}')" title="خوانده شد"><i class="bi bi-check2"></i></button>`}
+                            <button class="action-btn-sm" style="color:#ef4444" onclick="NotifPage.remove('${AdminApp.escape(n.id)}')" title="حذف"><i class="bi bi-trash"></i></button>
+                        </div>
+                    </div>`;
+            }).join("");
+        },
+    };
+    document.addEventListener("DOMContentLoaded", () => NotifPage.init());
+    </script>
+</body>
+</html>

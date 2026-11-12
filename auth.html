@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="robots" content="noindex, nofollow">
+    <title>ورود و ثبت‌نام | بلو مارکت</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ux.css">
+    <link rel="stylesheet" href="css/glass.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <meta name="description" content="ورود و ثبت‌نام در بلو مارکت">
+    <link rel="stylesheet" href="css/support-chat.css">
+</head>
+
+<body class="auth-page">
+<a class="skip-to-content" href="#main-content">رفتن به محتوای اصلی</a>
+
+<main id="main-content">
+    <div class="auth-wrapper">
+        <div class="auth-card">
+
+            <div class="auth-header">
+                <div class="auth-logo"><img src="images/logo.svg" alt="بلو مارکت" width="56" height="56" style="border-radius:14px;"></div>
+                <h1 class="auth-title">بلو مارکت</h1>
+                <p class="auth-subtitle">به خانواده بزرگ ما خوش آمدید</p>
+            </div>
+
+            <div class="auth-tabs" id="authTabs">
+                <button type="button" class="auth-tab-btn active" data-tab="login" onclick="AuthUI.switchTab('login')">
+                    <i class="bi bi-box-arrow-in-right"></i> ورود
+                </button>
+                <button type="button" class="auth-tab-btn" data-tab="register" onclick="AuthUI.switchTab('register')">
+                    <i class="bi bi-person-plus"></i> ثبت‌نام
+                </button>
+            </div>
+
+            <!-- ========== پنل ورود ========== -->
+            <div class="auth-panel active" id="panel-login">
+
+                <div class="general-error" id="loginGeneralError">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <span id="loginGeneralErrorText"></span>
+                </div>
+
+                <form id="loginForm" novalidate>
+                    <div class="form-field">
+                        <label for="loginEmail">ایمیل <span class="required">*</span></label>
+                        <div class="field-input-wrap" id="wrapLoginEmail">
+                            <div class="field-icon"><i class="bi bi-envelope"></i></div>
+                            <input type="email" id="loginEmail" placeholder="example@email.com"
+                                   autocomplete="email" inputmode="email" required>
+                        </div>
+                        <div class="field-error" id="errLoginEmail">
+                            <i class="bi bi-exclamation-circle-fill"></i><span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="loginPassword">رمز عبور <span class="required">*</span></label>
+                        <div class="field-input-wrap" id="wrapLoginPassword">
+                            <div class="field-icon"><i class="bi bi-lock"></i></div>
+                            <input type="password" id="loginPassword" placeholder="رمز عبور خود را وارد کنید"
+                                   autocomplete="current-password" required>
+                            <button type="button" class="toggle-password"
+                                    onclick="AuthUI.togglePassword('loginPassword', this)">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="field-error" id="errLoginPassword">
+                            <i class="bi bi-exclamation-circle-fill"></i><span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-check-row">
+                        <label class="custom-check">
+                            <input type="checkbox" id="rememberMe">
+                            <span>مرا به خاطر بسپار</span>
+                        </label>
+                        <a href="#" class="forgot-link" onclick="AuthUI.showForgotInfo(event)">
+                            فراموشی رمز عبور؟
+                        </a>
+                    </div>
+
+                    <button type="submit" class="btn-auth" id="loginSubmitBtn">
+                        <span class="spinner"></span>
+                        <i class="bi bi-box-arrow-in-right btn-icon"></i>
+                        <span class="btn-text">ورود به حساب</span>
+                    </button>
+                </form>
+
+                <div class="auth-divider"><span>یا</span></div>
+
+                <div class="social-login">
+                    <button type="button" class="social-btn google" onclick="AuthUI.socialInfo('google')">
+                        <i class="bi bi-google"></i> Google
+                    </button>
+                    <button type="button" class="social-btn apple" onclick="AuthUI.socialInfo('apple')">
+                        <i class="bi bi-apple"></i> Apple
+                    </button>
+                </div>
+
+                <div class="security-note">
+                    <i class="bi bi-shield-fill-check"></i>
+                    نسخه دمو — اطلاعات در همین مرورگر ذخیره می‌شود (بدون رمزنگاری واقعی)
+                </div>
+            </div>
+
+            <!-- ========== پنل ثبت‌نام ========== -->
+            <div class="auth-panel" id="panel-register">
+
+                <div class="general-error" id="registerGeneralError">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <span id="registerGeneralErrorText"></span>
+                </div>
+
+                <form id="registerForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="firstName">نام <span class="required">*</span></label>
+                            <div class="field-input-wrap" id="wrapFirstName">
+                                <div class="field-icon"><i class="bi bi-person"></i></div>
+                                <input type="text" id="firstName" placeholder="نام"
+                                       autocomplete="given-name" maxlength="50" required>
+                            </div>
+                            <div class="field-error" id="errFirstName">
+                                <i class="bi bi-exclamation-circle-fill"></i><span></span>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="lastName">نام خانوادگی <span class="required">*</span></label>
+                            <div class="field-input-wrap" id="wrapLastName">
+                                <div class="field-icon"><i class="bi bi-person-badge"></i></div>
+                                <input type="text" id="lastName" placeholder="نام خانوادگی"
+                                       autocomplete="family-name" maxlength="50" required>
+                            </div>
+                            <div class="field-error" id="errLastName">
+                                <i class="bi bi-exclamation-circle-fill"></i><span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="registerEmail">ایمیل <span class="required">*</span></label>
+                        <div class="field-input-wrap" id="wrapRegisterEmail">
+                            <div class="field-icon"><i class="bi bi-envelope"></i></div>
+                            <input type="email" id="registerEmail" placeholder="example@email.com"
+                                   autocomplete="email" inputmode="email" required>
+                        </div>
+                        <div class="field-error" id="errRegisterEmail">
+                            <i class="bi bi-exclamation-circle-fill"></i><span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="phoneNumber">شماره موبایل <span class="required">*</span></label>
+                        <div class="field-input-wrap" id="wrapPhone">
+                            <div class="field-icon"><i class="bi bi-phone"></i></div>
+                            <input type="tel" id="phoneNumber" placeholder="09123456789"
+                                   autocomplete="tel" inputmode="numeric" maxlength="11" required>
+                        </div>
+                        <div class="field-error" id="errPhone">
+                            <i class="bi bi-exclamation-circle-fill"></i><span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="registerPassword">رمز عبور <span class="required">*</span></label>
+                        <div class="field-input-wrap" id="wrapRegisterPassword">
+                            <div class="field-icon"><i class="bi bi-lock"></i></div>
+                            <input type="password" id="registerPassword" placeholder="حداقل ۶ کاراکتر"
+                                   autocomplete="new-password" maxlength="64" required>
+                            <button type="button" class="toggle-password"
+                                    onclick="AuthUI.togglePassword('registerPassword', this)">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="strength-bar">
+                                <div class="strength-bar-fill" id="strengthFill"></div>
+                            </div>
+                            <div class="strength-label">
+                                <span class="text" id="strengthText">—</span>
+                                <span class="hint">حداقل ۶ کاراکتر با حرف و عدد</span>
+                            </div>
+                        </div>
+                        <div class="field-error" id="errRegisterPassword">
+                            <i class="bi bi-exclamation-circle-fill"></i><span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="confirmPassword">تکرار رمز عبور <span class="required">*</span></label>
+                        <div class="field-input-wrap" id="wrapConfirmPassword">
+                            <div class="field-icon"><i class="bi bi-shield-lock"></i></div>
+                            <input type="password" id="confirmPassword" placeholder="رمز را دوباره وارد کنید"
+                                   autocomplete="new-password" maxlength="64" required>
+                            <button type="button" class="toggle-password"
+                                    onclick="AuthUI.togglePassword('confirmPassword', this)">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="field-error" id="errConfirmPassword">
+                            <i class="bi bi-exclamation-circle-fill"></i><span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-check-row">
+                        <label class="custom-check">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <span><a href="terms.html" target="_blank">قوانین و مقررات</a> را می‌پذیرم</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-auth" id="registerSubmitBtn">
+                        <span class="spinner"></span>
+                        <i class="bi bi-person-plus btn-icon"></i>
+                        <span class="btn-text">ایجاد حساب کاربری</span>
+                    </button>
+                </form>
+
+                <div class="security-note">
+                    <i class="bi bi-shield-fill-check"></i>
+                    نسخه دمو — رمز فقط در مرورگر شما ذخیره می‌شود
+                </div>
+            </div>
+
+        </div>
+
+        <div class="back-home">
+            <a href="index.html"><i class="bi bi-arrow-right"></i> بازگشت به صفحه اصلی</a>
+        </div>
+
+        <!-- دکمه‌ی پاک کردن کاربران (فقط در حالت دیباگ) -->
+        <div class="back-home" id="debugResetWrap" style="margin-top:12px;display:none;">
+            <a href="#" onclick="AuthUI.resetAllUsers(event)" style="color:#ef4444;opacity:0.7;font-size:0.78rem;">
+                <i class="bi bi-trash"></i> پاک کردن همه کاربران (تست)
+            </a>
+        </div>
+    </div>
+</main>
+
+<!-- BM Core -->
+<script src="js/config.js"></script>
+<script src="js/core/storage.js"></script>
+<script src="js/adapters/LocalStorageAdapter.js"></script>
+<script src="js/adapters/ApiAdapter.js"></script>
+<script src="js/repositories/ProductsRepository.js"></script>
+<script src="js/repositories/OrdersRepository.js"></script>
+<script src="js/repositories/UsersRepository.js"></script>
+<script src="js/repositories/TicketsRepository.js"></script>
+<script src="js/repositories/NotificationsRepository.js"></script>
+<script src="js/bootstrap.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="js/notification-center.js" defer></script>
+<script src="js/auth.js" defer></script>
+<script src="js/ux.js" defer></script>
+<script>
+/* ============================================
+   AuthUI — مدیریت رابط کاربری ورود/ثبت‌نام
+   ============================================ */
+const AuthUI = {
+    switchTab(tab) {
+        document.querySelectorAll(".auth-tab-btn").forEach((btn) => {
+            btn.classList.toggle("active", btn.dataset.tab === tab);
+        });
+        document.querySelectorAll(".auth-panel").forEach((p) => p.classList.remove("active"));
+        document.getElementById(`panel-${tab}`).classList.add("active");
+
+        const tabs = document.getElementById("authTabs");
+        tabs.classList.toggle("register-active", tab === "register");
+
+        this.clearAllErrors();
+
+        setTimeout(() => {
+            const firstInput = document.querySelector(`#panel-${tab} input:not([type="checkbox"])`);
+            if (firstInput) firstInput.focus();
+        }, 100);
+    },
+
+    togglePassword(inputId, btn) {
+        const input = document.getElementById(inputId);
+        if (!input) return;
+        const isPassword = input.type === "password";
+        input.type = isPassword ? "text" : "password";
+        btn.querySelector("i").className = isPassword ? "bi bi-eye-slash" : "bi bi-eye";
+    },
+
+    showError(fieldId, message) {
+        const wrap = document.getElementById("wrap" + fieldId);
+        const err = document.getElementById("err" + fieldId);
+        if (wrap) { wrap.classList.add("error"); wrap.classList.remove("success"); }
+        if (err) {
+            err.querySelector("span").textContent = message;
+            err.classList.add("show");
+        }
+    },
+
+    clearError(fieldId) {
+        const wrap = document.getElementById("wrap" + fieldId);
+        const err = document.getElementById("err" + fieldId);
+        if (wrap) wrap.classList.remove("error");
+        if (err) { err.classList.remove("show"); err.querySelector("span").textContent = ""; }
+    },
+
+    clearAllErrors() {
+        document.querySelectorAll(".field-error").forEach((el) => el.classList.remove("show"));
+        document.querySelectorAll(".field-input-wrap").forEach((el) => el.classList.remove("error"));
+        document.querySelectorAll(".general-error").forEach((el) => el.classList.remove("show"));
+    },
+
+    showGeneralError(target, message) {
+        const el = document.getElementById(target + "GeneralError");
+        const txt = document.getElementById(target + "GeneralErrorText");
+        if (el && txt) {
+            txt.textContent = message;
+            el.classList.add("show");
+            el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+    },
+
+    setLoading(btnId, loading) {
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        btn.classList.toggle("loading", loading);
+        btn.disabled = loading;
+    },
+
+    updatePasswordStrength(password) {
+        const wrapper = document.getElementById("passwordStrength");
+        const fill = document.getElementById("strengthFill");
+        const text = document.getElementById("strengthText");
+
+        if (!password) { wrapper.classList.remove("show"); return; }
+
+        const result = getPasswordStrength(password);
+        wrapper.classList.add("show");
+        fill.style.width = result.score * 20 + "%";
+        fill.style.background = result.color;
+        text.textContent = result.label;
+        text.style.color = result.color;
+    },
+
+    socialInfo(provider) {
+        const name = provider === "google" ? "گوگل" : "اپل";
+        showToast(`ورود با ${name} به‌زودی فعال می‌شود`, "info");
+    },
+
+    showForgotInfo(e) {
+        e.preventDefault();
+        showToast("برای بازیابی رمز، با پشتیبانی تماس بگیرید: 09229480252", "info");
+    },
+
+    resetAllUsers(e) {
+        e.preventDefault();
+        if (!confirm("⚠️ همه کاربران ثبت‌شده پاک شوند؟\n\nاین عملیات قابل بازگشت نیست.")) return;
+
+        localStorage.removeItem("registeredUsers");
+        localStorage.removeItem("blUser");
+        localStorage.removeItem("rememberedEmail");
+        localStorage.removeItem("redirectAfterLogin");
+
+        showToast("همه کاربران پاک شدند", "success");
+        setTimeout(() => window.location.reload(), 800);
+    },
+
+    init() {
+        // نمایش دکمه‌ی دیباگ فقط با ?debug=1
+        if (new URLSearchParams(window.location.search).get("debug") === "1") {
+            const wrap = document.getElementById("debugResetWrap");
+            if (wrap) wrap.style.display = "block";
+        }
+
+        if (isLoggedIn()) {
+            const redirect = this.getRedirectUrl();
+            window.location.href = redirect;
+            return;
+        }
+
+        const remembered = localStorage.getItem("rememberedEmail");
+        if (remembered) {
+            const emailInput = document.getElementById("loginEmail");
+            if (emailInput) {
+                emailInput.value = remembered;
+                document.getElementById("rememberMe").checked = true;
+            }
+        }
+
+        this.attachEvents();
+    },
+
+    getRedirectUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const urlRedirect = params.get("redirect");
+        if (urlRedirect && this.isSafeRedirect(urlRedirect)) return urlRedirect;
+        const stored = localStorage.getItem("redirectAfterLogin");
+        if (stored && this.isSafeRedirect(stored)) {
+            localStorage.removeItem("redirectAfterLogin");
+            return stored;
+        }
+        return "index.html";
+    },
+
+    isSafeRedirect(url) {
+        if (!url || typeof url !== "string") return false;
+        if (url.startsWith("http") || url.startsWith("//")) return false;
+        if (url.includes("auth.html") || url.includes("javascript:")) return false;
+        return /^[a-zA-Z0-9_\-\.\/]+\.html/.test(url);
+    },
+
+    attachEvents() {
+        const loginForm = document.getElementById("loginForm");
+        if (loginForm) loginForm.addEventListener("submit", (e) => this.handleLogin(e));
+
+        const registerForm = document.getElementById("registerForm");
+        if (registerForm) registerForm.addEventListener("submit", (e) => this.handleRegister(e));
+
+        const pwd = document.getElementById("registerPassword");
+        if (pwd) {
+            pwd.addEventListener("input", (e) => {
+                this.updatePasswordStrength(e.target.value);
+                this.clearError("RegisterPassword");
+            });
+        }
+
+        const fieldMap = {
+            loginEmail: "LoginEmail",
+            loginPassword: "LoginPassword",
+            firstName: "FirstName",
+            lastName: "LastName",
+            registerEmail: "RegisterEmail",
+            phoneNumber: "Phone",
+            registerPassword: "RegisterPassword",
+            confirmPassword: "ConfirmPassword",
+        };
+
+        Object.entries(fieldMap).forEach(([inputId, errKey]) => {
+            const input = document.getElementById(inputId);
+            if (input) input.addEventListener("input", () => this.clearError(errKey));
+        });
+
+        const phoneInput = document.getElementById("phoneNumber");
+        if (phoneInput) {
+            phoneInput.addEventListener("input", (e) => {
+                e.target.value = e.target.value.replace(/[^\d۰-۹]/g, "");
+            });
+        }
+    },
+
+    async handleLogin(e) {
+        e.preventDefault();
+        this.clearAllErrors();
+
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+        const remember = document.getElementById("rememberMe").checked;
+
+        if (!email) { this.showError("LoginEmail", "ایمیل الزامی است"); return; }
+        if (!password) { this.showError("LoginPassword", "رمز عبور الزامی است"); return; }
+
+        this.setLoading("loginSubmitBtn", true);
+
+        try {
+            const users = getRegisteredUsers();
+            const cleanEmail = email.toLowerCase();
+
+            const userExists = users.some((u) => String(u.email || "").toLowerCase() === cleanEmail);
+
+            if (!userExists) {
+                this.showGeneralError("login", "این ایمیل ثبت‌نام نکرده است. لطفاً ابتدا ثبت‌نام کنید.");
+                this.setLoading("loginSubmitBtn", false);
+
+                const rememberCheckbox = document.getElementById("rememberMe");
+                if (rememberCheckbox) rememberCheckbox.checked = false;
+
+                setTimeout(() => {
+                    this.switchTab("register");
+                    document.getElementById("registerEmail").value = email;
+                }, 1200);
+                return;
+            }
+
+            const success = await loginUser(email, password);
+
+            if (success) {
+                if (remember) localStorage.setItem("rememberedEmail", email);
+                else localStorage.removeItem("rememberedEmail");
+
+                const user = getCurrentUser();
+                showToast(`خوش آمدید ${user.firstName || user.name}!`, "success");
+
+                setTimeout(() => { window.location.href = this.getRedirectUrl(); }, 800);
+            } else {
+                this.showGeneralError("login", "ایمیل یا رمز عبور اشتباه است");
+            }
+        } catch (err) {
+            console.error(err);
+            this.showGeneralError("login", "خطای غیرمنتظره. لطفاً دوباره تلاش کنید.");
+        } finally {
+            this.setLoading("loginSubmitBtn", false);
+        }
+    },
+
+    async handleRegister(e) {
+        e.preventDefault();
+        this.clearAllErrors();
+
+        const firstName = document.getElementById("firstName").value.trim();
+        const lastName = document.getElementById("lastName").value.trim();
+        const email = document.getElementById("registerEmail").value.trim().toLowerCase();
+        const phone = document.getElementById("phoneNumber").value.trim();
+        const password = document.getElementById("registerPassword").value;
+        const passwordConfirm = document.getElementById("confirmPassword").value;
+        const agreeTerms = document.getElementById("agreeTerms").checked;
+
+        let hasError = false;
+
+        if (!firstName) { this.showError("FirstName", "نام الزامی است"); hasError = true; }
+        if (!lastName) { this.showError("LastName", "نام خانوادگی الزامی است"); hasError = true; }
+
+        if (!email) { this.showError("RegisterEmail", "ایمیل الزامی است"); hasError = true; }
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            this.showError("RegisterEmail", "فرمت ایمیل صحیح نیست"); hasError = true;
+        } else {
+            const users = getRegisteredUsers();
+            if (users.some((u) => String(u.email || "").toLowerCase() === email)) {
+                this.showError("RegisterEmail", "این ایمیل قبلاً ثبت‌نام شده است");
+                hasError = true;
+            }
+        }
+
+        if (!phone) { this.showError("Phone", "شماره موبایل الزامی است"); hasError = true; }
+        else {
+            const normalizedPhone = phone.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+            if (!/^09[0-9]{9}$/.test(normalizedPhone)) {
+                this.showError("Phone", "شماره موبایل باید با ۰۹ شروع شود و ۱۱ رقم باشد");
+                hasError = true;
+            }
+        }
+
+        if (!password) { this.showError("RegisterPassword", "رمز عبور الزامی است"); hasError = true; }
+        else if (password.length < 6) {
+            this.showError("RegisterPassword", "رمز عبور باید حداقل ۶ کاراکتر باشد");
+            hasError = true;
+        }
+
+        if (!passwordConfirm) { this.showError("ConfirmPassword", "تکرار رمز الزامی است"); hasError = true; }
+        else if (password !== passwordConfirm) {
+            this.showError("ConfirmPassword", "رمزها مطابقت ندارند"); hasError = true;
+        }
+
+        if (!agreeTerms) {
+            this.showGeneralError("register", "لطفاً قوانین و مقررات را بپذیرید");
+            hasError = true;
+        }
+
+        if (hasError) return;
+
+        this.setLoading("registerSubmitBtn", true);
+
+        try {
+            const success = await registerUser(firstName, lastName, email, phone, password);
+
+            if (success) {
+                showToast("ثبت‌نام با موفقیت انجام شد! خوش آمدید", "success");
+                setTimeout(() => { window.location.href = this.getRedirectUrl(); }, 1000);
+            } else {
+                this.showGeneralError("register", "خطا در ثبت‌نام. لطفاً دوباره تلاش کنید.");
+            }
+        } catch (err) {
+            console.error(err);
+            this.showGeneralError("register", "خطای غیرمنتظره. لطفاً دوباره تلاش کنید.");
+        } finally {
+            this.setLoading("registerSubmitBtn", false);
+        }
+    },
+};
+
+window.AuthUI = AuthUI;
+
+document.addEventListener("DOMContentLoaded", () => {
+    AuthUI.init();
+});
+</script>
+<!-- SEO -->
+<script src="js/seo.js" defer></script>
+<script src="js/demo-events.js"></script>
+<script src="js/support-chat.js" defer></script>
+</body>
+</html>

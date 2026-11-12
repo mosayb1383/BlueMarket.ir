@@ -1,0 +1,222 @@
+<!-- ═══════ نوار بالای هدر ═══════ -->
+<div class="bm-topbar">
+    <div class="bm-topbar-track">
+        <span class="bm-topbar-item"><i class="bi bi-truck"></i> ارسال رایگان برای خریدهای بالای ۵۰۰ هزار تومان</span>
+        <span class="bm-topbar-sep">✦</span>
+        <span class="bm-topbar-item"><i class="bi bi-shield-check"></i> ضمانت اصالت کالا + ۷ روز مهلت بازگشت</span>
+        <span class="bm-topbar-sep">✦</span>
+        <span class="bm-topbar-item"><i class="bi bi-lightning-charge"></i> تخفیف‌های ویژه امروز تا ۵۰٪ تخفیف</span>
+        <span class="bm-topbar-sep">✦</span>
+        <span class="bm-topbar-item"><i class="bi bi-headset"></i> پشتیبانی ۲۴ ساعته: ۰۹۲۲۹۴۸۰۲۵۲</span>
+        <span class="bm-topbar-sep">✦</span>
+        <span class="bm-topbar-item"><i class="bi bi-truck"></i> ارسال رایگان برای خریدهای بالای ۵۰۰ هزار تومان</span>
+        <span class="bm-topbar-sep">✦</span>
+        <span class="bm-topbar-item"><i class="bi bi-shield-check"></i> ضمانت اصالت کالا + ۷ روز مهلت بازگشت</span>
+        <span class="bm-topbar-sep">✦</span>
+        <span class="bm-topbar-item"><i class="bi bi-lightning-charge"></i> تخفیف‌های ویژه امروز تا ۵۰٪ تخفیف</span>
+        <span class="bm-topbar-sep">✦</span>
+        <span class="bm-topbar-item"><i class="bi bi-headset"></i> پشتیبانی ۲۴ ساعته: ۰۹۲۲۹۴۸۰۲۵۲</span>
+        <span class="bm-topbar-sep">✦</span>
+    </div>
+</div>
+
+<!-- ═══════ هدر اصلی ═══════ -->
+<div class="glass-header-wrapper" id="glassHeaderWrapper">
+    <header class="glass-header">
+        <!-- ردیف ۱ -->
+        <div class="bm-header-row">
+            <button type="button" class="bm-menu-btn d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuDrawer" aria-label="منو">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <a class="bm-brand" href="index.html" aria-label="بلو مارکت">
+                <img src="images/logo.svg" alt="بلو مارکت" width="38" height="38">
+                <span class="bm-brand-text">بلو مارکت</span>
+            </a>
+
+            <form class="bm-search-form d-none d-md-flex" id="desktopSearchForm" onsubmit="homeSearch(event)" autocomplete="off">
+                <i class="bi bi-search bm-search-icon"></i>
+                <input type="text" id="desktopSearchInput" class="bm-search-input" placeholder="جستجو در بلو مارکت..." aria-label="جستجو">
+                <button type="submit" class="bm-search-btn" aria-label="جستجو">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+
+            <div class="bm-header-actions">
+                <div class="user-notif-wrap" id="userNotifWrap" style="display:none;">
+                    <button type="button" class="bm-icon-btn user-notif-btn" onclick="UserNotifications.togglePanel()" aria-label="اعلان‌ها">
+                        <i class="bi bi-bell"></i>
+                        <span class="user-notif-badge">0</span>
+                    </button>
+                    <div class="user-notif-panel" id="userNotifPanel">
+                        <div class="user-notif-header">
+                            <h4><i class="bi bi-bell-fill"></i> اعلان‌ها</h4>
+                            <button class="user-notif-mark-all" onclick="UserNotifications.markAllRead()">همه را خواندم</button>
+                        </div>
+                        <div class="user-notif-list" id="userNotifList"></div>
+                        <a href="notifications.html" class="user-notif-viewall">مشاهده همه اعلان‌ها</a>
+                    </div>
+                </div>
+                <div id="authSection" class="d-none d-lg-block"></div>
+                <a href="cart.html" class="bm-cart-btn d-none d-lg-flex" aria-label="سبد خرید" onclick="goToCart(event);">
+                    <i class="bi bi-cart3"></i>
+                    <span class="cart-badge">0</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- ردیف ۲: دسته‌بندی -->
+        <div class="bm-cat-nav-row">
+            <button type="button" class="bm-cat-toggle" id="bmCatToggle" aria-label="دسته‌بندی کالاها">
+                <i class="bi bi-grid-3x3-gap-fill"></i>
+                <span>دسته‌بندی کالاها</span>
+                <i class="bi bi-chevron-down bm-cat-chevron"></i>
+            </button>
+
+            <div class="bm-cat-quick">
+                <a href="products.html?discount=1" class="bm-cat-quick-item bm-cat-hot"><i class="bi bi-fire"></i> تخفیف‌های امروز</a>
+                <a href="products.html" class="bm-cat-quick-item"><i class="bi bi-shop"></i> همه محصولات</a>
+                <a href="products.html?sort=bestselling" class="bm-cat-quick-item"><i class="bi bi-trophy"></i> پرفروش‌ها</a>
+                <a href="products.html?sort=newest" class="bm-cat-quick-item"><i class="bi bi-stars"></i> جدیدترین‌ها</a>
+                <a href="contact.html" class="bm-cat-quick-item"><i class="bi bi-headset"></i> پشتیبانی</a>
+            </div>
+        </div>
+    </header>
+</div>
+
+<!-- ═══════ مگامنو ═══════ -->
+<div class="bm-megamenu-overlay" id="bmMegamenuOverlay">
+    <div class="bm-megamenu-full">
+        <div class="bm-megamenu-inner">
+            
+            <!-- ستون ۱ -->
+            <div class="bm-megamenu-col">
+                <h4 class="bm-mega-title"><a href="mobiles.html">موبایل و کالای دیجیتال</a></h4>
+                <h5 class="bm-mega-subtitle"><a href="mobiles.html">گوشی موبایل</a></h5>
+                <ul>
+                    <li><a href="products.html?sub=mobile-samsung">گوشی سامسونگ</a></li>
+                    <li><a href="products.html?sub=mobile-apple">گوشی اپل، آیفون</a></li>
+                    <li><a href="products.html?sub=mobile-xiaomi">گوشی شیائومی</a></li>
+                    <li><a href="products.html?sub=mobile-huawei">گوشی هوآوی</a></li>
+                </ul>
+                <h5 class="bm-mega-subtitle" style="margin-top:20px;"><a href="tablets.html">تبلت</a></h5>
+                <ul>
+                    <li><a href="products.html?sub=tablet-samsung">تبلت سامسونگ</a></li>
+                    <li><a href="products.html?sub=tablet-apple">تبلت اپل، آیپد</a></li>
+                    <li><a href="products.html?sub=tablet-lenovo">تبلت لنوو</a></li>
+                </ul>
+                <h5 class="bm-mega-subtitle" style="margin-top:20px;"><a href="products.html?sub=headphones">هدفون، هندزفری و هدست</a></h5>
+            </div>
+
+            <!-- ستون ۲ -->
+            <div class="bm-megamenu-col">
+                <h4 class="bm-mega-title"><a href="products.html?sub=case">لوازم جانبی موبایل و تبلت</a></h4>
+                <ul>
+                    <li><a href="products.html?sub=case">کیف و کاور گوشی</a></li>
+                    <li><a href="products.html?sub=charger">شارژر</a></li>
+                    <li><a href="products.html?sub=cable">کابل و تبدیل</a></li>
+                    <li><a href="products.html?sub=powerbank">پاوربانک</a></li>
+                    <li><a href="products.html?sub=battery">باتری موبایل و تبلت</a></li>
+                </ul>
+            </div>
+
+            <!-- ستون ۳ -->
+            <div class="bm-megamenu-col">
+                <h4 class="bm-mega-title"><a href="laptops.html">لپ‌تاپ و کامپیوتر</a></h4>
+                <h5 class="bm-mega-subtitle"><a href="laptops.html">لپ‌تاپ</a></h5>
+                <ul>
+                    <li><a href="products.html?sub=laptop-asus">لپ‌تاپ ایسوس</a></li>
+                    <li><a href="products.html?sub=laptop-lenovo">لپ‌تاپ لنوو</a></li>
+                    <li><a href="products.html?sub=laptop-hp">لپ‌تاپ اچ‌پی</a></li>
+                    <li><a href="products.html?sub=laptop-apple">مک‌بوک اپل</a></li>
+                    <li><a href="products.html?sub=laptop-dell">لپ‌تاپ دل</a></li>
+                </ul>
+                <h5 class="bm-mega-subtitle" style="margin-top:20px;"><a href="products.html?sub=monitor">لوازم کامپیوتر</a></h5>
+                <ul>
+                    <li><a href="products.html?sub=monitor">مانیتور</a></li>
+                    <li><a href="products.html?sub=mouse">ماوس</a></li>
+                    <li><a href="products.html?sub=keyboard">کیبورد</a></li>
+                    <li><a href="products.html?sub=storage">هارد و SSD</a></li>
+                </ul>
+            </div>
+
+            <!-- ستون ۴ -->
+            <div class="bm-megamenu-col">
+                <h4 class="bm-mega-title"><a href="products.html?sub=gaming">گیمینگ</a></h4>
+                <ul>
+                    <li><a href="products.html?sub=gaming">دسته بازی</a></li>
+                    <li><a href="products.html?sub=gaming">هدست گیمینگ</a></li>
+                </ul>
+                <h4 class="bm-mega-title" style="margin-top:20px;"><a href="products.html?sub=watch-apple">ساعت هوشمند</a></h4>
+                <ul>
+                    <li><a href="products.html?sub=watch-apple">اپل واچ</a></li>
+                    <li><a href="products.html?sub=watch-samsung">گلکسی واچ</a></li>
+                    <li><a href="products.html?sub=watch-garmin">گارمین</a></li>
+                </ul>
+            </div>
+
+            <!-- ستون ۵ -->
+            <div class="bm-megamenu-col">
+                <h4 class="bm-mega-title"><a href="products.html?sub=powerbank">لوازم الکتریکی</a></h4>
+                <ul>
+                    <li><a href="products.html?sub=powerbank">پاوربانک</a></li>
+                    <li><a href="products.html?sub=charger">شارژر همراه</a></li>
+                    <li><a href="products.html?sub=cable">کابل و تبدیل</a></li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- ═══════ Offcanvas موبایل ═══════ -->
+<div class="offcanvas offcanvas-end bm-offcanvas" tabindex="-1" id="mobileMenuDrawer" aria-labelledby="mobileMenuLabel">
+    <div class="offcanvas-header bm-offcanvas-head">
+        <div class="bm-offcanvas-brand">
+            <img src="images/logo.svg" alt="بلو مارکت" width="32" height="32">
+            <div><strong>بلو مارکت</strong><small>BLUE MARKET</small></div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="بستن"></button>
+    </div>
+    <div class="offcanvas-body bm-offcanvas-body">
+        <form class="bm-search-mobile" id="mobileSearchForm" onsubmit="homeSearch(event)" autocomplete="off">
+            <i class="bi bi-search"></i>
+            <input type="text" id="mobileSearchInput" placeholder="جستجو..." aria-label="جستجو">
+            <button type="submit" aria-label="جستجو"><i class="bi bi-arrow-left"></i></button>
+        </form>
+        <div class="bm-offcanvas-group">
+            <div class="bm-offcanvas-title">دسته‌بندی کالاها</div>
+            <ul class="bm-offcanvas-list">
+                <li><a href="mobiles.html"><i class="bi bi-phone"></i> گوشی موبایل</a></li>
+                <li><a href="laptops.html"><i class="bi bi-laptop"></i> لپ‌تاپ</a></li>
+                <li><a href="tablets.html"><i class="bi bi-tablet"></i> تبلت</a></li>
+                <li><a href="watches.html"><i class="bi bi-smartwatch"></i> ساعت هوشمند</a></li>
+                <li><a href="accessories.html"><i class="bi bi-headphones"></i> لوازم جانبی</a></li>
+            </ul>
+        </div>
+        <div class="bm-offcanvas-group">
+            <div class="bm-offcanvas-title">فروشگاه</div>
+            <ul class="bm-offcanvas-list">
+                <li><a href="products.html?discount=1"><i class="bi bi-fire" style="color:#ef4444;"></i> تخفیف‌ها</a></li>
+                <li><a href="products.html"><i class="bi bi-grid-3x3-gap"></i> همه محصولات</a></li>
+            </ul>
+        </div>
+        <div class="bm-offcanvas-group">
+            <div class="bm-offcanvas-title">اطلاعات</div>
+            <ul class="bm-offcanvas-list">
+                <li><a href="abuot.html"><i class="bi bi-info-circle"></i> درباره ما</a></li>
+                <li><a href="contact.html"><i class="bi bi-telephone"></i> تماس با ما</a></li>
+                <li><a href="faq.html"><i class="bi bi-question-circle"></i> سوالات متداول</a></li>
+            </ul>
+        </div>
+        <div class="bm-offcanvas-group" id="mobileAuthMenuItem"></div>
+    </div>
+</div>
+
+<!-- ═══════ Bottom Nav ═══════ -->
+<nav class="mobile-bottom-nav d-lg-none" aria-label="ناوبری موبایل">
+    <a href="index.html" class="bottom-nav-item" data-nav="home"><i class="bi bi-house-door"></i><small>خانه</small></a>
+    <a href="products.html" class="bottom-nav-item" data-nav="shop"><i class="bi bi-shop"></i><small>فروشگاه</small></a>
+    <a href="cart.html" class="bottom-nav-item" data-nav="cart" onclick="goToCart(event);"><i class="bi bi-cart3"></i><small>سبد خرید</small><span class="cart-badge">0</span></a>
+    <a href="account.html" class="bottom-nav-item" data-nav="account"><i class="bi bi-person"></i><small>پروفایل</small></a>
+</nav>

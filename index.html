@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بلو مارکت | خرید موبایل، لپ‌تاپ، تبلت و لوازم جانبی دیجیتال</title>
+    <meta name="description" content="بلو مارکت — فروشگاه آنلاین موبایل، لپ‌تاپ، تبلت، ساعت هوشمند و لوازم جانبی با ضمانت اصالت کالا.">
+    <meta name="theme-color" content="#f97316">
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ux.css">
+    <link rel="stylesheet" href="css/scroll-animations.css">
+    <link rel="stylesheet" href="css/user-panel.css">
+    <link rel="stylesheet" href="css/glass.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/support-chat.css">
+</head>
+<body class="glass-body">
+<a class="skip-to-content" href="#main-content">رفتن به محتوای اصلی</a>
+
+<div class="bm-scroll-progress" id="scrollProgress"></div>
+
+<div class="bm-topbar" id="bmTopbar">
+    <div class="bm-topbar-inner">
+        <div class="bm-topbar-msg">
+            <i class="bi bi-truck"></i>
+            <span>ارسال رایگان بالای ۵۰۰ هزار تومان — کد تخفیف: <strong>BLUE20</strong></span>
+        </div>
+        <button type="button" class="bm-topbar-close" onclick="closeTopbar()" aria-label="بستن">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+</div>
+
+<div id="header-placeholder"></div>
+
+<main id="main-content" class="home-page">
+
+    <!-- ════════ 1. Hero بنر اصلی ════════ -->
+    <section class="bm-hero" aria-label="پیشنهاد ویژه">
+        <div class="bm-hero-inner">
+            <div class="bm-hero-bg-effects">
+                <div class="bm-hero-orb bm-orb-1"></div>
+                <div class="bm-hero-orb bm-orb-2"></div>
+                <div class="bm-hero-grid"></div>
+            </div>
+            <div class="bm-hero-content">
+                <div class="bm-hero-badge">
+                    <span class="bm-hero-badge-dot"></span>
+                    پیشنهاد ویژه پاییزی
+                </div>
+                <h1 class="bm-hero-title">
+                    هرچی می‌خوای،<br>
+                    <span class="bm-gradient-text">هم اینجا، هم با تخفیف!</span>
+                </h1>
+                <p class="bm-hero-desc">
+                    گوشی، لپ‌تاپ، هدفون و لوازم جانبی با بهترین قیمت و ضمانت اصالت.
+                    ارسال سریع به سراسر ایران.
+                </p>
+                <div class="bm-hero-actions">
+                    <a href="products.html" class="bm-btn-primary">
+                        <i class="bi bi-bag-check-fill"></i> خرید آنلاین
+                    </a>
+                    <a href="#discount-section" id="heroDiscountBtn" class="bm-btn-outline">
+                        <i class="bi bi-fire"></i> تخفیف‌های امروز
+                    </a>
+                </div>
+                <div class="bm-hero-features">
+                    <div class="bm-hero-feat"><i class="bi bi-truck"></i><span>ارسال سریع</span></div>
+                    <div class="bm-hero-feat"><i class="bi bi-shield-check"></i><span>ضمانت اصالت</span></div>
+                    <div class="bm-hero-feat"><i class="bi bi-arrow-repeat"></i><span>بازگشت ۷ روزه</span></div>
+                </div>
+            </div>
+            <div class="bm-hero-visual">
+                <div class="bm-hero-product-glass"></div>
+                <div class="bm-hero-product">
+                    <img src="https://dkstatics-public.digikala.com/digikala-products/c80c15d623ac35a9b337658f3f5e45d14f96eb1b_1757835697.jpg" alt="محصولات بلو مارکت" fetchpriority="high" onerror="this.src='images/products/placeholder-product.svg'">
+                </div>
+                <div class="bm-hero-float bm-float-1">
+                    <div class="bm-float-icon"><i class="bi bi-percent"></i></div>
+                    <div class="bm-float-text"><span>تا ۴۰٪</span><small>تخفیف ویژه</small></div>
+                </div>
+                <div class="bm-hero-float bm-float-2">
+                    <div class="bm-float-icon"><i class="bi bi-star-fill"></i></div>
+                    <div class="bm-float-text"><span>۴.۸ امتیاز</span><small>از ۵۰۰+ خرید</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 2. دسته‌بندی دایره‌ای ════════ -->
+    <section class="bm-circles-cats" aria-label="دسته‌بندی‌ها">
+        <div class="container">
+            <div class="bm-circles-grid">
+                <a href="products.html?cat=mobile" class="bm-circle-cat">
+                    <div class="bm-circle-icon"><i class="bi bi-phone"></i></div>
+                    <span>موبایل</span>
+                </a>
+                <a href="products.html?cat=laptop" class="bm-circle-cat">
+                    <div class="bm-circle-icon"><i class="bi bi-laptop"></i></div>
+                    <span>لپ‌تاپ</span>
+                </a>
+                <a href="products.html?cat=tablet" class="bm-circle-cat">
+                    <div class="bm-circle-icon"><i class="bi bi-tablet"></i></div>
+                    <span>تبلت</span>
+                </a>
+                <a href="products.html?cat=watch" class="bm-circle-cat">
+                    <div class="bm-circle-icon"><i class="bi bi-smartwatch"></i></div>
+                    <span>ساعت هوشمند</span>
+                </a>
+                <a href="products.html?sub=headphones" class="bm-circle-cat">
+                    <div class="bm-circle-icon"><i class="bi bi-headphones"></i></div>
+                    <span>هدفون</span>
+                </a>
+                <a href="products.html?sub=powerbank" class="bm-circle-cat">
+                    <div class="bm-circle-icon"><i class="bi bi-battery-charging"></i></div>
+                    <span>پاوربانک</span>
+                </a>
+                <a href="products.html?sub=charger" class="bm-circle-cat">
+                    <div class="bm-circle-icon"><i class="bi bi-plug"></i></div>
+                    <span>شارژر</span>
+                </a>
+                <a href="products.html?sub=case" class="bm-circle-cat">
+                    <div class="bm-circle-icon"><i class="bi bi-shield"></i></div>
+                    <span>قاب و گلس</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 3. تخفیف‌های ویژه ════════ -->
+    <section class="bm-discount-section" aria-labelledby="discountHeading" id="discount-section">
+        <div class="container">
+            <div class="bm-section-head">
+                <div class="bm-section-head-left">
+                    <h2 id="discountHeading" class="bm-section-title">
+                        <i class="bi bi-lightning-charge-fill"></i> تخفیف‌های ویژه
+                    </h2>
+                    <div class="bm-timer" id="discountTimer"><i class="bi bi-clock"></i><span>در حال بارگذاری...</span></div>
+                </div>
+                <a href="products.html?discount=1" class="bm-view-all">مشاهده همه <i class="bi bi-arrow-left"></i></a>
+            </div>
+            <div class="bm-slider-wrapper">
+                <button type="button" class="bm-slider-btn bm-prev" onclick="slideDiscount(-1)" aria-label="قبلی"><i class="bi bi-chevron-right"></i></button>
+                <div class="bm-slider bm-discount-slider" id="discountProductsContainer"></div>
+                <button type="button" class="bm-slider-btn bm-next" onclick="slideDiscount(1)" aria-label="بعدی"><i class="bi bi-chevron-left"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 4. بنرهای ۳ گانه ════════ -->
+    <section class="bm-banners-section" aria-label="پیشنهادهای ویژه">
+        <div class="container">
+            <div class="bm-banners-grid">
+                <a href="products.html?cat=mobile" class="bm-banner-card">
+                    <div class="bm-banner-bg" style="background:linear-gradient(135deg,#1e293b,#0f172a);"></div>
+                    <div class="bm-banner-content">
+                        <span class="bm-banner-tag">محصولات سامسونگ</span>
+                        <h3 class="bm-banner-title">گلکسی‌های جدید</h3>
+                        <p class="bm-banner-desc">از سری S تا A</p>
+                        <span class="bm-banner-btn">خرید کنید <i class="bi bi-arrow-left"></i></span>
+                    </div>
+                    <div class="bm-banner-visual"><i class="bi bi-phone"></i></div>
+                </a>
+                <a href="products.html?cat=laptop" class="bm-banner-card">
+                    <div class="bm-banner-bg" style="background:linear-gradient(135deg,#7c2d12,#431407);"></div>
+                    <div class="bm-banner-content">
+                        <span class="bm-banner-tag">محصولات ایسوس</span>
+                        <h3 class="bm-banner-title">گیمینگ حرفه‌ای</h3>
+                        <p class="bm-banner-desc">RTX 40 Series</p>
+                        <span class="bm-banner-btn">خرید کنید <i class="bi bi-arrow-left"></i></span>
+                    </div>
+                    <div class="bm-banner-visual"><i class="bi bi-laptop"></i></div>
+                </a>
+                <a href="products.html?cat=accessory" class="bm-banner-card">
+                    <div class="bm-banner-bg" style="background:linear-gradient(135deg,#831843,#4c0519);"></div>
+                    <div class="bm-banner-content">
+                        <span class="bm-banner-tag">لوازم جانبی</span>
+                        <h3 class="bm-banner-title">هدفون و هندزفری</h3>
+                        <p class="bm-banner-desc">تا ۵۵٪ تخفیف</p>
+                        <span class="bm-banner-btn">خرید کنید <i class="bi bi-arrow-left"></i></span>
+                    </div>
+                    <div class="bm-banner-visual"><i class="bi bi-headphones"></i></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 5. محبوب‌ترین موبایل‌ها ════════ -->
+    <section class="bm-products-section" aria-labelledby="mobileHeading">
+        <div class="container">
+            <div class="bm-section-head">
+                <h2 id="mobileHeading" class="bm-section-title"><i class="bi bi-phone"></i> محبوب‌ترین موبایل‌ها</h2>
+                <a href="products.html?cat=mobile" class="bm-view-all">مشاهده همه <i class="bi bi-arrow-left"></i></a>
+            </div>
+            <div class="bm-slider-wrapper">
+                <button type="button" class="bm-slider-btn bm-prev" onclick="slideMobile(-1)" aria-label="قبلی"><i class="bi bi-chevron-right"></i></button>
+                <div class="bm-slider" id="mobileProductsContainer"></div>
+                <button type="button" class="bm-slider-btn bm-next" onclick="slideMobile(1)" aria-label="بعدی"><i class="bi bi-chevron-left"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 6. بنر کیف پول ════════ -->
+    <section class="bm-wallet-banner-section">
+        <div class="container">
+            <div class="bm-wallet-banner">
+                <div class="bm-wallet-content">
+                    <span class="bm-wallet-tag"><i class="bi bi-wallet2"></i> کیف پول بلو مارکت</span>
+                    <h3>با کیف پول، از تخفیف‌های بیشتری لذت ببر!</h3>
+                    <p>شارژ کن، خرید کن، هدیه بگیر. تا ۱۰٪ بازگشت نقدی روی خریدها.</p>
+                    <a href="account.html" class="bm-btn-white"><i class="bi bi-plus-circle"></i> شارژ کیف پول</a>
+                </div>
+                <div class="bm-wallet-visual">
+                    <div class="bm-wallet-card bm-wc-1"><i class="bi bi-wallet-fill"></i><span>بلو کارت</span></div>
+                    <div class="bm-wallet-card bm-wc-2"><i class="bi bi-credit-card-2-front-fill"></i><span>شارژ آسان</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 7. محبوب‌ترین لوازم جانبی ════════ -->
+    <section class="bm-products-section" aria-labelledby="accessoryHeading">
+        <div class="container">
+            <div class="bm-section-head">
+                <h2 id="accessoryHeading" class="bm-section-title"><i class="bi bi-headphones"></i> محبوب‌ترین لوازم جانبی</h2>
+                <a href="products.html?cat=accessory" class="bm-view-all">مشاهده همه <i class="bi bi-arrow-left"></i></a>
+            </div>
+            <div class="bm-slider-wrapper">
+                <button type="button" class="bm-slider-btn bm-prev" onclick="slideAccessory(-1)" aria-label="قبلی"><i class="bi bi-chevron-right"></i></button>
+                <div class="bm-slider" id="accessoryProductsContainer"></div>
+                <button type="button" class="bm-slider-btn bm-next" onclick="slideAccessory(1)" aria-label="بعدی"><i class="bi bi-chevron-left"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 7.4. تب‌های دسته‌بندی ════════ -->
+    <section class="bm-tabs-section" aria-labelledby="tabsHeading">
+        <div class="container">
+            <div class="bm-section-head">
+                <h2 id="tabsHeading" class="bm-section-title"><i class="bi bi-grid-3x3-gap-fill"></i> پیشنهاد ویژه دسته‌بندی‌ها</h2>
+                <a href="products.html" class="bm-view-all">مشاهده همه <i class="bi bi-arrow-left"></i></a>
+            </div>
+            <div class="bm-tabs">
+                <button type="button" class="bm-tab active" data-cat="mobile"><i class="bi bi-phone"></i> موبایل</button>
+                <button type="button" class="bm-tab" data-cat="laptop"><i class="bi bi-laptop"></i> لپ‌تاپ</button>
+                <button type="button" class="bm-tab" data-cat="tablet"><i class="bi bi-tablet"></i> تبلت</button>
+                <button type="button" class="bm-tab" data-cat="watch"><i class="bi bi-smartwatch"></i> ساعت</button>
+                <button type="button" class="bm-tab" data-cat="accessory"><i class="bi bi-headphones"></i> لوازم جانبی</button>
+            </div>
+            <div class="bm-tabs-wrapper">
+                <button type="button" class="bm-tabs-btn bm-tabs-prev" onclick="slideTabs(-1)" aria-label="قبلی"><i class="bi bi-chevron-right"></i></button>
+                <div class="bm-tabs-content" id="tabsContent"></div>
+                <button type="button" class="bm-tabs-btn bm-tabs-next" onclick="slideTabs(1)" aria-label="بعدی"><i class="bi bi-chevron-left"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 7.5. جدیدترین‌ها ════════ -->
+    <section class="bm-new-section" aria-labelledby="newHeading">
+        <div class="container">
+            <div class="bm-section-head">
+                <h2 id="newHeading" class="bm-section-title"><i class="bi bi-stars"></i> جدیدترین‌ها</h2>
+                <a href="products.html?sort=newest" class="bm-view-all">مشاهده همه <i class="bi bi-arrow-left"></i></a>
+            </div>
+            <div class="bm-slider-wrapper">
+                <button type="button" class="bm-slider-btn bm-prev" onclick="slideNew(-1)" aria-label="قبلی"><i class="bi bi-chevron-right"></i></button>
+                <div class="bm-slider" id="newProductsContainer"></div>
+                <button type="button" class="bm-slider-btn bm-next" onclick="slideNew(1)" aria-label="بعدی"><i class="bi bi-chevron-left"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 7.6. پیشنهاد شگفت‌انگیز ════════ -->
+    <section class="bm-deal-section" aria-labelledby="dealHeading">
+        <div class="container">
+            <div class="bm-deal-card" id="dealCard"></div>
+        </div>
+    </section>
+
+    <!-- ════════ 8. پرفروش‌ترین‌ها ════════ -->
+    <section class="bm-bestsellers-section" aria-labelledby="bestsellHeading">
+        <div class="container">
+            <div class="bm-section-head">
+                <h2 id="bestsellHeading" class="bm-section-title"><i class="bi bi-trophy-fill"></i> پرفروش‌ترین‌های بلو مارکت</h2>
+                <a href="products.html?sort=bestselling" class="bm-view-all">مشاهده همه <i class="bi bi-arrow-left"></i></a>
+            </div>
+            <div class="bm-bestsellers-grid" id="bestsellersContainer"></div>
+        </div>
+    </section>
+
+    <!-- ════════ 9. برندهای منتخب ════════ -->
+    <section class="bm-brands-section" aria-labelledby="brandsHeading">
+        <div class="container">
+            <h2 id="brandsHeading" class="bm-section-title bm-section-title-center"><i class="bi bi-award"></i> برندهای منتخب</h2>
+            <div class="bm-brands-row">
+                <a href="products.html?brand=apple" class="bm-brand-chip"><i class="bi bi-apple"></i><span>Apple</span></a>
+                <a href="products.html?brand=samsung" class="bm-brand-chip"><i class="bi bi-phone"></i><span>Samsung</span></a>
+                <a href="products.html?brand=xiaomi" class="bm-brand-chip"><i class="bi bi-phone"></i><span>Xiaomi</span></a>
+                <a href="products.html?brand=huawei" class="bm-brand-chip"><i class="bi bi-phone"></i><span>Huawei</span></a>
+                <a href="products.html?brand=asus" class="bm-brand-chip"><i class="bi bi-laptop"></i><span>ASUS</span></a>
+                <a href="products.html?brand=lenovo" class="bm-brand-chip"><i class="bi bi-laptop"></i><span>Lenovo</span></a>
+                <a href="products.html?brand=sony" class="bm-brand-chip"><i class="bi bi-headphones"></i><span>Sony</span></a>
+                <a href="products.html?brand=anker" class="bm-brand-chip"><i class="bi bi-battery-charging"></i><span>Anker</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 10. ویژگی‌های فروشگاه ════════ -->
+    <section class="bm-features-section" aria-label="مزایای خرید">
+        <div class="container">
+            <div class="bm-features-grid">
+                <div class="bm-feature-card"><div class="bm-feature-icon"><i class="bi bi-truck"></i></div><h3>ارسال سریع</h3><p>ارسال رایگان بالای ۵۰۰ هزار تومان</p></div>
+                <div class="bm-feature-card"><div class="bm-feature-icon"><i class="bi bi-shield-check"></i></div><h3>ضمانت اصالت</h3><p>گارانتی معتبر و ضمانت اصالت کالا</p></div>
+                <div class="bm-feature-card"><div class="bm-feature-icon"><i class="bi bi-headset"></i></div><h3>پشتیبانی ۲۴/۷</h3><p>پشتیبانی آنلاین در تمام ساعات</p></div>
+                <div class="bm-feature-card"><div class="bm-feature-icon"><i class="bi bi-arrow-repeat"></i></div><h3>بازگشت ۷ روزه</h3><p>امکان بازگشت کالا تا ۷ روز</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ نوار مقایسه ════════ -->
+    <div class="bm-compare-bar" id="compareBar">
+        <div class="bm-compare-items" id="compareItems"></div>
+        <div class="bm-compare-actions">
+            <button type="button" class="bm-compare-clear" onclick="clearCompare()"><i class="bi bi-x-circle"></i> پاک کردن</button>
+            <button type="button" class="bm-compare-go" onclick="goToCompare()"><i class="bi bi-columns-gap"></i> مقایسه</button>
+        </div>
+    </div>
+
+    <!-- ════════ 3.1. اخیراً دیده‌شده ════════ -->
+    <section class="bm-recent-section" id="recentSection" style="display:none;" aria-labelledby="recentHeading">
+        <div class="container">
+            <div class="bm-section-head">
+                <h2 id="recentHeading" class="bm-section-title"><i class="bi bi-clock-history"></i> اخیراً دیده‌شده</h2>
+                <button type="button" class="bm-view-all" onclick="clearRecent()" style="border:none;cursor:pointer;font-family:inherit;"><i class="bi bi-trash"></i> پاک کردن</button>
+            </div>
+            <div class="bm-slider-wrapper">
+                <button type="button" class="bm-slider-btn bm-prev" onclick="slideRecent(-1)" aria-label="قبلی"><i class="bi bi-chevron-right"></i></button>
+                <div class="bm-slider" id="recentContainer"></div>
+                <button type="button" class="bm-slider-btn bm-next" onclick="slideRecent(1)" aria-label="بعدی"><i class="bi bi-chevron-left"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 3.2. بنر اپلیکیشن ════════ -->
+    <section class="bm-app-section" aria-labelledby="appHeading">
+        <div class="container">
+            <div class="bm-app-card">
+                <div class="bm-app-content">
+                    <span class="bm-app-badge"><i class="bi bi-phone"></i> اپلیکیشن موبایل</span>
+                    <h3 id="appHeading">بلو مارکت رو روی گوشیت داشته باش</h3>
+                    <p>سریع‌تر، ارزان‌تر، با تخفیف‌های ویژه اپلیکیشن. اسکن کن و نصب کن!</p>
+                    <div class="bm-app-buttons">
+                        <a href="#" class="bm-app-btn bm-app-google"><i class="bi bi-google-play"></i><div><span class="small">دریافت از</span><span class="big">Google Play</span></div></a>
+                        <a href="#" class="bm-app-btn bm-app-bazaar"><i class="bi bi-shop"></i><div><span class="small">دریافت از</span><span class="big">کافه بازار</span></div></a>
+                    </div>
+                </div>
+                <div class="bm-app-visual">
+                    <div class="bm-app-phone"><div class="bm-app-phone-screen"><div class="bm-app-phone-notch"></div><i class="bi bi-shop-window"></i></div></div>
+                    <div class="bm-app-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://bluemarket.ir" alt="QR Code" loading="lazy"><span>اسکن کن</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 3.3. عضویت / خبرنامه ════════ -->
+    <section class="bm-newsletter-section" aria-labelledby="newsletterHeading">
+        <div class="container">
+            <div class="bm-newsletter-card">
+                <div class="bm-newsletter-icon"><i class="bi bi-envelope-heart"></i></div>
+                <div class="bm-newsletter-content">
+                    <h3 id="newsletterHeading">عضو شو، ۵۰ هزار تومان هدیه بگیر!</h3>
+                    <p>با عضویت در خبرنامه، از تخفیف‌ها و پیشنهادهای ویژه زودتر از همه باخبر شو.</p>
+                </div>
+                <form class="bm-newsletter-form" onsubmit="event.preventDefault();subscribeNewsletter(this);">
+                    <input type="tel" placeholder="شماره موبایل یا ایمیل" required>
+                    <button type="submit"><i class="bi bi-send"></i> عضویت</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ 3.4. نظر مشتریان ════════ -->
+    <section class="bm-testimonials-section" aria-labelledby="testiHeading">
+        <div class="container">
+            <h2 id="testiHeading" class="bm-section-title bm-section-title-center"><i class="bi bi-chat-quote-fill"></i> مشتریان درباره ما چی می‌گن؟</h2>
+            <div class="bm-testimonials-grid">
+                <div class="bm-testimonial-card">
+                    <div class="bm-testi-quote">"</div>
+                    <div class="bm-testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                    <p>سفارشم رو ۲۴ ساعته تحویل گرفتم. بسته‌بندی عالی و اصالت کالا تضمینی. حتماً بازم خرید می‌کنم.</p>
+                    <div class="bm-testi-user"><div class="bm-testi-avatar" style="background:linear-gradient(135deg,#f97316,#ea580c)">م</div><div><strong>محمد رضایی</strong><span>خریدار گوشی سامسونگ</span></div></div>
+                </div>
+                <div class="bm-testimonial-card">
+                    <div class="bm-testi-quote">"</div>
+                    <div class="bm-testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                    <p>پشتیبانی خیلی خوبی دارن. یه مشکل توی سفارشم داشتم سریع پیگیری کردن و حل شد. ممنون!</p>
+                    <div class="bm-testi-user"><div class="bm-testi-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">س</div><div><strong>سارا احمدی</strong><span>خریدار لپ‌تاپ ایسوس</span></div></div>
+                </div>
+                <div class="bm-testimonial-card">
+                    <div class="bm-testi-quote">"</div>
+                    <div class="bm-testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
+                    <p>قیمت‌ها واقعاً منصفانه‌ست. با تخفیف ویژه‌شون هدفون سونی رو خیلی زیر قیمت بازار خریدم.</p>
+                    <div class="bm-testi-user"><div class="bm-testi-avatar" style="background:linear-gradient(135deg,#10b981,#059669)">ع</div><div><strong>علی کریمی</strong><span>خریدار هدفون سونی</span></div></div>
+                </div>
+                <div class="bm-testimonial-card">
+                    <div class="bm-testi-quote">"</div>
+                    <div class="bm-testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                    <p>تنوع محصولات خیلی بالاست. هرچی لازم داشتم توی همین سایت پیدا کردم. ارسالشون هم فوق‌العاده سریع بود.</p>
+                    <div class="bm-testi-user"><div class="bm-testi-avatar" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">ن</div><div><strong>نگار موسوی</strong><span>خریدار لوازم جانبی</span></div></div>
+                </div>
+                <div class="bm-testimonial-card">
+                    <div class="bm-testi-quote">"</div>
+                    <div class="bm-testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+                    <p>بسته‌بندی خیلی محکم و مرتب بود. کالا کاملاً سالم رسید. این اولین خریدم نبود و مطمئناً آخرین هم نیست.</p>
+                    <div class="bm-testi-user"><div class="bm-testi-avatar" style="background:linear-gradient(135deg,#ec4899,#db2777)">ر</div><div><strong>رضا شریفی</strong><span>خریدار تبلت</span></div></div>
+                </div>
+                <div class="bm-testimonial-card">
+                    <div class="bm-testi-quote">"</div>
+                    <div class="bm-testi-stars"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
+                    <p>کیفیت محصولات عالیه. ضمانت اصالت هم واقعاً ارزشمنده. توصیه می‌کنم حتماً از این فروشگاه خرید کنید.</p>
+                    <div class="bm-testi-user"><div class="bm-testi-avatar" style="background:linear-gradient(135deg,#eab308,#ca8a04)">ف</div><div><strong>فاطمه کریمی</strong><span>خریدار ساعت هوشمند</span></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ دسته‌بندی‌های ویژه ════════ -->
+    <section class="bm-feature-cats" aria-labelledby="featCatsHeading">
+        <div class="container">
+            <h2 id="featCatsHeading" class="bm-section-title bm-section-title-center"><i class="bi bi-stars"></i> دسته‌بندی‌های ویژه</h2>
+            <div class="bm-feature-cats-grid">
+                <a href="products.html?sub=mobile-samsung" class="bm-feat-cat-card" style="--accent:#3b82f6;">
+                    <div class="bm-feat-cat-bg"></div>
+                    <div class="bm-feat-cat-content"><span class="bm-feat-cat-tag">سامسونگ</span><h3>گلکسی‌های جدید</h3><p>از سری S تا A</p><span class="bm-feat-cat-btn">مشاهده <i class="bi bi-arrow-left"></i></span></div>
+                    <div class="bm-feat-cat-icon"><i class="bi bi-phone"></i></div>
+                </a>
+                <a href="products.html?sub=laptop-gaming" class="bm-feat-cat-card" style="--accent:#ef4444;">
+                    <div class="bm-feat-cat-bg"></div>
+                    <div class="bm-feat-cat-content"><span class="bm-feat-cat-tag">گیمینگ</span><h3>لپ‌تاپ گیمینگ</h3><p>RTX 40 Series</p><span class="bm-feat-cat-btn">مشاهده <i class="bi bi-arrow-left"></i></span></div>
+                    <div class="bm-feat-cat-icon"><i class="bi bi-laptop"></i></div>
+                </a>
+                <a href="products.html?sub=headphones" class="bm-feat-cat-card" style="--accent:#8b5cf6;">
+                    <div class="bm-feat-cat-bg"></div>
+                    <div class="bm-feat-cat-content"><span class="bm-feat-cat-tag">صوتی</span><h3>هدفون و هندزفری</h3><p>تا ۵۵٪ تخفیف</p><span class="bm-feat-cat-btn">مشاهده <i class="bi bi-arrow-left"></i></span></div>
+                    <div class="bm-feat-cat-icon"><i class="bi bi-headphones"></i></div>
+                </a>
+                <a href="products.html?sub=watch-apple" class="bm-feat-cat-card" style="--accent:#10b981;">
+                    <div class="bm-feat-cat-bg"></div>
+                    <div class="bm-feat-cat-content"><span class="bm-feat-cat-tag">پوشیدنی</span><h3>ساعت هوشمند</h3><p>اپل واچ و گلکسی واچ</p><span class="bm-feat-cat-btn">مشاهده <i class="bi bi-arrow-left"></i></span></div>
+                    <div class="bm-feat-cat-icon"><i class="bi bi-smartwatch"></i></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ چطور خرید کنم؟ ════════ -->
+    <section class="bm-how-section" aria-labelledby="howHeading">
+        <div class="container">
+            <h2 id="howHeading" class="bm-section-title bm-section-title-center"><i class="bi bi-lightbulb"></i> چطور خرید کنم؟</h2>
+            <div class="bm-how-grid">
+                <div class="bm-how-step"><div class="bm-how-num">۱</div><div class="bm-how-icon"><i class="bi bi-search"></i></div><h3>محصول رو انتخاب کن</h3><p>از بین هزاران محصول، اونی که می‌خوای رو پیدا کن</p></div>
+                <div class="bm-how-step"><div class="bm-how-num">۲</div><div class="bm-how-icon"><i class="bi bi-credit-card"></i></div><h3>پرداخت امن</h3><p>با درگاه امن بانکی پرداخت کن</p></div>
+                <div class="bm-how-step"><div class="bm-how-num">۳</div><div class="bm-how-icon"><i class="bi bi-box-seam"></i></div><h3>بسته‌بندی حرفه‌ای</h3><p>با بسته‌بندی ایمن آماده ارسال می‌شه</p></div>
+                <div class="bm-how-step"><div class="bm-how-num">۴</div><div class="bm-how-icon"><i class="bi bi-truck"></i></div><h3>تحویل سریع</h3><p>در سریع‌ترین زمان به دستت می‌رسه</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ مقالات / بلاگ ════════ -->
+    <section class="bm-blog-section" aria-labelledby="blogHeading">
+        <div class="container">
+            <div class="bm-section-head">
+                <h2 id="blogHeading" class="bm-section-title"><i class="bi bi-journal-text"></i> مقالات و راهنمای خرید</h2>
+                <a href="blog.html" class="bm-view-all">همه مقالات <i class="bi bi-arrow-left"></i></a>
+            </div>
+            <div class="bm-blog-grid">
+                <a href="blog.html" class="bm-blog-card"><div class="bm-blog-img" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);"><i class="bi bi-phone"></i></div><div class="bm-blog-content"><span class="bm-blog-tag">راهنمای خرید</span><h3>بهترین گوشی‌های زیر ۱۰ میلیون تومان</h3><p>مقایسه ۱۰ گوشی محبوب با بهترین ارزش خرید</p><span class="bm-blog-meta"><i class="bi bi-clock"></i> ۵ دقیقه مطالعه</span></div></a>
+                <a href="blog.html" class="bm-blog-card"><div class="bm-blog-img" style="background:linear-gradient(135deg,#f97316,#ea580c);"><i class="bi bi-laptop"></i></div><div class="bm-blog-content"><span class="bm-blog-tag">دانشجویی</span><h3>راهنمای خرید لپ‌تاپ برای دانشجویان</h3><p>چه لپ‌تاپی برای برنامه‌نویسی یا طراحی مناسب است؟</p><span class="bm-blog-meta"><i class="bi bi-clock"></i> ۷ دقیقه مطالعه</span></div></a>
+                <a href="blog.html" class="bm-blog-card"><div class="bm-blog-img" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);"><i class="bi bi-headphones"></i></div><div class="bm-blog-content"><span class="bm-blog-tag">صوتی</span><h3>هدفون بی‌سیم خوب چه ویژگی‌هایی داره؟</h3><p>همه چیز درباره هدفون‌های True Wireless</p><span class="bm-blog-meta"><i class="bi bi-clock"></i> ۴ دقیقه مطالعه</span></div></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ نوار همکاری / عمده ════════ -->
+    <section class="bm-b2b-section">
+        <div class="container">
+            <div class="bm-b2b-bar">
+                <div class="bm-b2b-content"><i class="bi bi-briefcase"></i><div><strong>تأمین‌کننده یا فروشنده هستی؟</strong><span>با بلو مارکت همکاری کن و محصولاتت رو بفروش</span></div></div>
+                <a href="contact.html" class="bm-b2b-btn">همکاری با ما <i class="bi bi-arrow-left"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ دکمه پشتیبانی شناور ════════ -->
+    <button type="button" class="bm-support-fab" id="supportFab" onclick="openSupportChat()" aria-label="پشتیبانی">
+        <i class="bi bi-headset"></i>
+        <span class="bm-support-pulse"></span>
+    </button>
+
+    <!-- ════════ دکمه برگشت به بالا ════════ -->
+    <button type="button" class="bm-back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="بازگشت به بالا">
+        <svg class="bm-progress-ring" width="56" height="56">
+            <circle class="bm-progress-bg" cx="28" cy="28" r="24"></circle>
+            <circle class="bm-progress-fill" id="progressCircle" cx="28" cy="28" r="24"></circle>
+        </svg>
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+</main>
+
+<div id="footer-placeholder"></div>
+
+<!-- BM Core -->
+<script src="js/config.js"></script>
+<script src="js/core/storage.js"></script>
+<script src="js/adapters/LocalStorageAdapter.js"></script>
+<script src="js/adapters/ApiAdapter.js"></script>
+<script src="js/repositories/ProductsRepository.js"></script>
+<script src="js/repositories/OrdersRepository.js"></script>
+<script src="js/repositories/UsersRepository.js"></script>
+<script src="js/repositories/TicketsRepository.js"></script>
+<script src="js/repositories/NotificationsRepository.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+<script src="js/products-data.js" defer></script>
+<script src="js/product-images.js" defer></script>
+<script src="js/bootstrap.js" defer></script>
+<script src="js/notification-center.js" defer></script>
+<script src="js/auth.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/notifications.js" defer></script>
+<script src="js/ux.js" defer></script>
+<script src="js/modal.js" defer></script>
+<script src="js/components.js" defer></script>
+<script src="js/home.js" defer></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    Promise.all([
+        fetch('components/header.html').then(r => r.text()),
+        fetch('components/footer.html').then(r => r.text())
+    ]).then(([headerHTML, footerHTML]) => {
+        document.getElementById('header-placeholder').innerHTML = headerHTML;
+        window.dispatchEvent(new CustomEvent('bl:header-ready'));
+        if (typeof updateAuthUI === 'function') updateAuthUI();
+        document.getElementById('footer-placeholder').innerHTML = footerHTML;
+        if (typeof updateAuthUI === 'function') updateAuthUI();
+        if (typeof updateCartBadge === 'function') updateCartBadge();
+        if (typeof setupHeaderScroll === 'function') setupHeaderScroll();
+    }).catch(err => console.error('خطا در لود کامپوننت‌ها:', err));
+});
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').then(reg => console.log('[PWA] SW registered:', reg.scope)).catch(err => console.warn('[PWA] SW failed:', err));
+    });
+}
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('bmPreloader');
+    if (preloader) {
+        setTimeout(() => { preloader.classList.add('hidden'); setTimeout(() => preloader.remove(), 600); }, 500);
+    }
+});
+document.addEventListener("DOMContentLoaded", function() {
+    const btn = document.getElementById("heroDiscountBtn");
+    const target = document.getElementById("discount-section");
+    if (btn && target) {
+        btn.addEventListener("click", function(e) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+    }
+});
+</script>
+<script src="js/seo.js" defer></script>
+<script src="js/support-chat.js" defer></script>
+</body>
+</html>
